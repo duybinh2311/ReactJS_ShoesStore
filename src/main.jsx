@@ -24,7 +24,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             scrollBehavior: 'smooth',
           },
           body: {
-            color: theme.colorScheme === 'dark' ? theme.white : theme.black,
+            color: theme.white,
           },
         }),
         breakpoints: {
