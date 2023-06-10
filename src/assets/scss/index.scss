@@ -1,10 +1,13 @@
 @import 'slick-carousel/slick/slick.css';
 @import 'slick-carousel/slick/slick-theme.css';
 
-.slick-slide {
+.slick-slide img {
   filter: grayscale(1);
+  transform: rotate(0) scale(0.7);
+  transition: all 0.4s ease-in-out;
 }
 
-.slick-current {
-  filter: grayscale(0);
+.slick-current img {
+  filter: grayscale(0) drop-shadow(0 0 50px rgba(102, 63, 217, 0.4));
+  transform: rotate(-15deg) scale(1) translate(-10px, -5px);
 }
