@@ -1,3 +1,3 @@
-import AccountPage from './components/AccountPage'
+import AccountPage from './AccountPage'
 
 export default AccountPage

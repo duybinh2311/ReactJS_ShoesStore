@@ -1,26 +1,19 @@
 import React, { useEffect, useState } from 'react'
-import styleHeader from './styleHeader'
-import {
-  Burger,
-  Button,
-  Container,
-  Divider,
-  Group,
-  Tabs,
-  Title,
-  useMantineTheme,
-} from '@mantine/core'
+import styleHeader from './style'
+import { Burger, Button, Container, Group, Tabs, Title } from '@mantine/core'
 import { useNavigate, useParams } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 export default function Header() {
-  const navigate = useNavigate()
+  /* Local State */
   const [opened, setOpened] = useState(false)
   const [scroll, setscroll] = useState(false)
-  const theme = useMantineTheme()
+  /* Hook Init */
+  const navigate = useNavigate()
   const { tabValue } = useParams()
   const { classes, cx } = styleHeader()
+  /* Logic */
   const handleScroll = () => {
     const scrollPos = window.scrollY
     if (scrollPos >= 20) {
@@ -32,6 +25,7 @@ export default function Header() {
   }
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
   return (
     <header className={cx(classes.header, { [classes.headerActive]: scroll })}>
@@ -42,7 +36,6 @@ export default function Header() {
             onClick={() => setOpened((opened) => !opened)}
             className={classes.burger}
           />
-
           <Tabs
             variant="pills"
             defaultValue="/"
@@ -60,11 +53,9 @@ export default function Header() {
               <Tabs.Tab value="shop">Shop</Tabs.Tab>
             </Tabs.List>
           </Tabs>
-
           <Title order={3} className={classes.title}>
             ReactJS - CapStone
           </Title>
-
           <Group>
             <Button variant="gradient" radius={'md'}>
               Sign In
@@ -80,7 +71,6 @@ export default function Header() {
             <FontAwesomeIcon icon={faHeart} className={classes.icon} beat />
           </Group>
         </Group>
-
         <Tabs
           variant="pills"
           defaultValue="/"

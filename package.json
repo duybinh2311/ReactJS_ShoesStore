@@ -16,7 +16,6 @@
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@mantine/core": "^6.0.13",
-    "@mantine/ds": "^6.0.13",
     "@mantine/form": "^6.0.13",
     "@mantine/hooks": "^6.0.13",
     "@mantine/modals": "^6.0.13",
@@ -28,7 +27,10 @@
     "react-hot-toast": "^2.4.1",
     "react-loading-skeleton": "^3.3.1",
     "react-redux": "^8.0.7",
-    "react-router-dom": "^6.12.0"
+    "react-router-dom": "^6.12.0",
+    "react-slick": "^0.29.0",
+    "sass": "^1.63.3",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.37",

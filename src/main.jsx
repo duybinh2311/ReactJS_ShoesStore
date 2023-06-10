@@ -1,9 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import router from 'router/router'
 import { MantineProvider } from '@mantine/core'
 import { NavigationProgress } from '@mantine/nprogress'
 import { RouterProvider } from 'react-router-dom'
-import router from 'router/router'
+import ripple from 'utils/keyframes/ripple'
+import 'assets/scss/index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -26,6 +28,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           body: {
             color: theme.white,
           },
+          '.slick-slider': {
+            overflow: 'hidden',
+            cursor: 'pointer',
+          },
         }),
         breakpoints: {
           xs: 480,
@@ -35,6 +41,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           xl: 1440,
         },
         colorScheme: 'dark',
+        primaryColor: 'violet',
+        primaryShade: 8,
+        shadows: {},
+        activeStyles: {
+          transform: 'scale(0.95)',
+        },
+        defaultGradient: { deg: 90, from: 'violet', to: 'blue' },
+        components: {
+          Button: {
+            styles: {
+              root: {
+                '&:hover': {
+                  animation: `${ripple} 3s ease-in-out infinite`,
+                },
+              },
+            },
+          },
+        },
       }}
     >
       <NavigationProgress autoReset={true} />
