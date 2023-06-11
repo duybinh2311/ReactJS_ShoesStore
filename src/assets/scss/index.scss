@@ -7,7 +7,17 @@
   transition: all 0.4s ease-in-out;
 }
 
-.slick-current img {
-  filter: grayscale(0) drop-shadow(0 0 50px rgba(102, 63, 217, 0.4));
-  transform: rotate(-15deg) scale(1) translate(-10px, -5px);
+.slick-current {
+  .mantine-Image-imageWrapper {
+    &::before {
+      filter: grayscale(0) blur(0);
+    }
+    img {
+      filter: grayscale(0) drop-shadow(0 0 50px rgba(102, 63, 217, 0.4));
+      transform: rotate(-15deg) scale(1.1) translate(-10px, -5px);
+      &:hover {
+        transform: rotate(0deg) translateY(-10px);
+      }
+    }
+  }
 }

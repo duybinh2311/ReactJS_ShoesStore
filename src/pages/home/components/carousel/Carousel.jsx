@@ -34,8 +34,8 @@ export default function Carousel() {
           slidesToShow={3}
           swipeToSlide={true}
           focusOnSelect={true}
-          autoplay={true}
-          autoplaySpeed={5000}
+          // autoplay={true}
+          // autoplaySpeed={5000}
         >
           {dataCarousel.productItem.map((item, index) => {
             return (

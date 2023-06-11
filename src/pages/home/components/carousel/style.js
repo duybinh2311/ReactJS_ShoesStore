@@ -1,5 +1,6 @@
 import { createStyles } from '@mantine/core'
 import moveY from 'utils/keyframes/moveY'
+import dataCarousel from './data'
 
 const carouselStyle = createStyles((theme) => ({
   imageWrapper: {
@@ -21,8 +22,30 @@ const carouselStyle = createStyles((theme) => ({
     animation: `${moveY} 2s ease-in-out infinite alternate`,
   },
   imageWrapper2: {
-    background: theme.white,
-    borderRadius: 30,
+    position: 'relative',
+    borderRadius: 20,
+    border: `2px solid ${theme.fn.rgba('#fff', 0.7)}`,
+    '&:before': {
+      content: "''",
+      borderRadius: 20,
+      padding: 10,
+      width: '100%',
+      height: '100%',
+      position: 'absolute',
+      backgroundImage: `url(${dataCarousel.backgroundSub})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center right bottom',
+      backgroundRepeat: 'no-repeat',
+      transition: 'all 0.4s ease-in',
+      filter: 'grayscale(1) blur(1px)',
+    },
+    '&:hover:before': {
+      filter: 'grayscale(0) blur(0)',
+    },
+    '&:hover img': {
+      scale: '1.1',
+      filter: 'grayscale(0)',
+    },
   },
   rootImage2: {
     [theme.fn.smallerThan('md')]: {
@@ -33,19 +56,18 @@ const carouselStyle = createStyles((theme) => ({
     position: 'relative',
     '&:after': {
       content: "''",
-      display: 'block',
       position: 'absolute',
       width: '100%',
       height: '100%',
-      top: 10,
-      left: 10,
+      top: 7,
+      left: 7,
       zIndex: '-5',
       background: theme.fn.gradient(),
-      borderRadius: 30,
+      borderRadius: 20,
     },
   },
   image2: {
-    filter: `drop-shadow(0 0 10px ${theme.fn.rgba(theme.black, 0.2)})`,
+    transition: 'all 0.4s ease-in',
   },
 }))
 
