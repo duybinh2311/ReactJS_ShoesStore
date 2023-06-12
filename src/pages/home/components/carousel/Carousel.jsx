@@ -1,18 +1,22 @@
 import React, { useState } from 'react'
 import Slider from 'react-slick'
 import dataCarousel from './data'
+import styleCarousel from './style'
 import { Container, Group, Image } from '@mantine/core'
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import carouselStyle from './style'
 
 export default function Carousel() {
+  /* Local State */
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
-  const { classes } = carouselStyle()
+  /* Style */
+  const { classes } = styleCarousel()
   return (
     <>
-      <Slider ref={(slider1) => setNav1(slider1)} asNavFor={nav2}>
+      <Slider
+        ref={(slider1) => setNav1(slider1)}
+        asNavFor={nav2}
+        arrows={false}
+      >
         {dataCarousel.productItem.map((item, index) => {
           return (
             <Group key={index}>
@@ -27,15 +31,23 @@ export default function Carousel() {
           )
         })}
       </Slider>
-      <Container size={'sm'} mr={0}>
+      <Container
+        size={'xs'}
+        sizes={{
+          xs: '35rem',
+        }}
+        mr={0}
+        className={classes.container}
+      >
         <Slider
           ref={(slider2) => setNav2(slider2)}
           asNavFor={nav1}
           slidesToShow={3}
           swipeToSlide={true}
           focusOnSelect={true}
-          // autoplay={true}
-          // autoplaySpeed={5000}
+          autoplay={true}
+          autoplaySpeed={5000}
+          arrows={false}
         >
           {dataCarousel.productItem.map((item, index) => {
             return (

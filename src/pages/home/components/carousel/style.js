@@ -1,8 +1,8 @@
-import { createStyles } from '@mantine/core'
+import { createStyles, rem } from '@mantine/core'
 import moveY from 'utils/keyframes/moveY'
 import dataCarousel from './data'
 
-const carouselStyle = createStyles((theme) => ({
+const styleCarousel = createStyles((theme) => ({
   imageWrapper: {
     width: '40%',
     margin: '0 auto',
@@ -47,6 +47,14 @@ const carouselStyle = createStyles((theme) => ({
       filter: 'grayscale(0)',
     },
   },
+  container: {
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+    [theme.fn.smallerThan('lg')]: {
+      maxWidth: rem(450),
+    },
+  },
   rootImage2: {
     [theme.fn.smallerThan('md')]: {
       display: 'none',
@@ -59,11 +67,12 @@ const carouselStyle = createStyles((theme) => ({
       position: 'absolute',
       width: '100%',
       height: '100%',
-      top: 7,
-      left: 7,
+      top: 5,
+      left: 5,
       zIndex: '-5',
-      background: theme.fn.gradient(),
+      background: theme.fn.primaryColor(),
       borderRadius: 20,
+      filter: 'blur(3px) opacity(0.7)',
     },
   },
   image2: {
@@ -71,4 +80,4 @@ const carouselStyle = createStyles((theme) => ({
   },
 }))
 
-export default carouselStyle
+export default styleCarousel

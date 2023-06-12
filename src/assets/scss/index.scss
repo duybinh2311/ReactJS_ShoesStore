@@ -14,9 +14,9 @@
     }
     img {
       filter: grayscale(0) drop-shadow(0 0 50px rgba(102, 63, 217, 0.4));
-      transform: rotate(-15deg) scale(1.1) translate(-10px, -5px);
+      transform: rotate(-15deg) scale(1.1) translate(-5px, -5px);
       &:hover {
-        transform: rotate(0deg) translateY(-10px);
+        transform: rotate(0deg) translateY(-10px) rotateX('10deg');
       }
     }
   }
