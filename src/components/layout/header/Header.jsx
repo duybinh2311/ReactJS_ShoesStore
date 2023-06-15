@@ -63,6 +63,7 @@ export default function Header() {
                 <Tabs.Tab value="/">Home</Tabs.Tab>
                 <Tabs.Tab value="account">Account</Tabs.Tab>
                 <Tabs.Tab value="shop">Shop</Tabs.Tab>
+                <Tabs.Tab value="detail/10">Detail</Tabs.Tab>
               </Tabs.List>
             </Tabs>
             <Title order={3} className={classes.title}>
