@@ -1,24 +1,4 @@
-@import 'slick-carousel/slick/slick.css';
-@import 'slick-carousel/slick/slick-theme.css';
-
-.slick-slide img {
-  filter: grayscale(1);
-  transform: rotate(0) scale(0.7);
-  transition: all 0.6s ease;
-}
-
-.slick-current {
-  .mantine-Image-imageWrapper {
-    &::before {
-      filter: grayscale(0) blur(0);
-    }
-    img {
-      filter: grayscale(0) drop-shadow(0 0 50px rgba(102, 63, 217, 0.4));
-      transform: rotate(-15deg) scale(1.1) translate(-5px, -5px);
-      &:hover {
-        transform: rotate(0deg);
-        transform-origin: center;
-      }
-    }
-  }
-}
+@import 'base';
+@import 'slick-carousel/slick/slick';
+@import 'slick-carousel/slick/slick-theme';
+@import 'slickConfig';

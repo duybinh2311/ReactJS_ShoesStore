@@ -18,16 +18,16 @@ import {
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
-import styleCardProduct from './style'
 import bgProduct from 'assets/img/bg-product.jpg'
 import { useHover } from '@mantine/hooks'
-import dataCarousel from '@/pages/home/layouts/carousel/data'
+import useStyles from './CardProduct.style'
+import dataCarousel from 'pages/home/layouts/carousel/data'
 
 export default function CardProduct({ maxWidth, height }) {
   /* Hook Init */
   const { hovered, ref } = useHover()
   /* Style */
-  const { classes } = styleCardProduct()
+  const { classes } = useStyles()
   return (
     <>
       <Card withBorder radius={'md'} h={height}>

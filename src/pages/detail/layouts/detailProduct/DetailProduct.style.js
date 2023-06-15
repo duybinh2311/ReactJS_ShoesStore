@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core'
 
-const styleDetailProduct = createStyles((theme) => ({
+export default createStyles((theme) => ({
   likeIcon: {
     backgroundColor: theme.colors.dark[5],
     transition: 'all 0.2s linear',
@@ -15,5 +15,3 @@ const styleDetailProduct = createStyles((theme) => ({
     flexGrow: 1,
   },
 }))
-
-export default styleDetailProduct

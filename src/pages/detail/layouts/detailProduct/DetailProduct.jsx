@@ -18,11 +18,11 @@ import QuantityInput from 'components/base/quantityInput'
 import PaymentIcon from 'components/base/paymentIcon'
 import AvatarCustomer from './components/AvatarCustomer'
 import SizeGroup from './components/SizeGroup'
-import styleDetailProduct from './style'
+import useStyles from './DetailProduct.style'
 
 export default function DetailProduct() {
   /* Style */
-  const { classes } = styleDetailProduct()
+  const { classes } = useStyles()
   return (
     <Grid>
       <Grid.Col sm={12} md={6}>

@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core'
 
-const styleQuantityInput = createStyles((theme) => ({
+export default createStyles((theme) => ({
   wrapper: {
     width: 'fit-content',
     padding: `${rem(6)} ${theme.spacing.xs}`,
@@ -19,5 +19,3 @@ const styleQuantityInput = createStyles((theme) => ({
     },
   },
 }))
-
-export default styleQuantityInput

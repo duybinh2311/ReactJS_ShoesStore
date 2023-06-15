@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core'
 
-const styleCardProduct = createStyles((theme) => ({
+export default createStyles((theme) => ({
   card: {
     position: 'relative',
     boxShadow:
@@ -46,5 +46,3 @@ const styleCardProduct = createStyles((theme) => ({
     },
   },
 }))
-
-export default styleCardProduct

@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core'
 
-const styleDetailPage = createStyles((theme) => ({
+export default createStyles((theme) => ({
   detailProduct: {
     margin: `${rem(50)} 0`,
   },
@@ -8,5 +8,3 @@ const styleDetailPage = createStyles((theme) => ({
     margin: `${theme.spacing.xl} 0`,
   },
 }))
-
-export default styleDetailPage

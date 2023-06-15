@@ -1,14 +1,14 @@
 import React from 'react'
 import useNaviProgress from 'hooks/useNaviProgress'
 import { Container } from '@mantine/core'
-import styleHomePage from './style'
+import useStyle from './HomePage.style'
 import Carousel from './layouts/carousel/Carousel'
 import PopularProduct from './layouts/popularProduct/PopularProduct'
 
 export default function HomePage() {
   useNaviProgress()
   /* Style */
-  const { classes } = styleHomePage()
+  const { classes } = useStyle()
   return (
     <>
       <section className={classes.carousel}>

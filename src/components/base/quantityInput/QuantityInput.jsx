@@ -2,14 +2,14 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ActionIcon, Group, Text } from '@mantine/core'
 import React, { useState } from 'react'
-import styleQuantityInput from './style'
+import useStyles from './QuantityInput.style'
 import PropTypes from 'prop-types'
 
 export default function QuantityInput({ min, max, className }) {
   /* Local State */
   const [value, setValue] = useState(min)
   /* Style */
-  const { classes, cx } = styleQuantityInput()
+  const { classes, cx } = useStyles()
   return (
     <Group className={cx(classes.wrapper, className)} position="apart">
       <ActionIcon

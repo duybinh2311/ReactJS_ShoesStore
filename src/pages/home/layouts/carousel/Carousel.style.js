@@ -2,7 +2,7 @@ import { createStyles, rem } from '@mantine/core'
 import moveY from 'utils/keyframes/moveY'
 import dataCarousel from './data'
 
-const styleCarousel = createStyles((theme) => ({
+export default createStyles((theme) => ({
   imageWrapper: {
     width: '40%',
     margin: '0 auto',
@@ -79,5 +79,3 @@ const styleCarousel = createStyles((theme) => ({
     transition: 'all 0.4s ease-in',
   },
 }))
-
-export default styleCarousel

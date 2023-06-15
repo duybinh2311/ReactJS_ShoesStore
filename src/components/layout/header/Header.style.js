@@ -1,6 +1,6 @@
 import { createStyles } from '@mantine/core'
 
-const styleHeader = createStyles((theme) => ({
+export default createStyles((theme) => ({
   header: {
     padding: '15px 0',
     backgroundColor: 'transparent',
@@ -75,5 +75,3 @@ const styleHeader = createStyles((theme) => ({
     },
   },
 }))
-
-export default styleHeader

@@ -9,11 +9,11 @@ import {
   Title,
 } from '@mantine/core'
 import { SiFacebook, SiJordan, SiTwitter, SiYoutube } from 'react-icons/si'
-import styleFooter from './style'
+import useStyles from './Footer.style'
 
 export default function Footer() {
   /* Style */
-  const { classes } = styleFooter()
+  const { classes } = useStyles()
   return (
     <footer className={classes.footer}>
       <Container size={'xl'}>

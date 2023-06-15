@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Slider from 'react-slick'
 import dataCarousel from './data'
-import styleCarousel from './style'
+import useStyles from './Carousel.style'
 import { Container, Group, Image } from '@mantine/core'
 
 export default function Carousel() {
@@ -9,7 +9,7 @@ export default function Carousel() {
   const [nav1, setNav1] = useState()
   const [nav2, setNav2] = useState()
   /* Style */
-  const { classes } = styleCarousel()
+  const { classes } = useStyles()
   return (
     <>
       <Slider

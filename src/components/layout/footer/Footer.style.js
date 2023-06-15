@@ -1,6 +1,6 @@
 import { createStyles, rem } from '@mantine/core'
 
-const styleFooter = createStyles({
+export default createStyles({
   footer: {
     margin: `${rem(50)} 0`,
   },
@@ -11,5 +11,3 @@ const styleFooter = createStyles({
     },
   },
 })
-
-export default styleFooter

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import styleHeader from './style'
+import useStyles from './Header.style'
 import {
   Burger,
   Button,
@@ -21,7 +21,7 @@ export default function Header() {
   const navigate = useNavigate()
   const { tabValue } = useParams()
   /* Style */
-  const { classes, cx } = styleHeader()
+  const { classes, cx } = useStyles()
   /* Logic */
   const handleScroll = () => {
     const scrollY = window.scrollY

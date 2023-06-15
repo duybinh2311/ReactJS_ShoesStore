@@ -28,10 +28,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           body: {
             color: theme.white,
           },
-          '.slick-slider': {
-            overflow: 'hidden',
-            cursor: 'pointer',
-          },
         }),
         breakpoints: {
           xs: 480,
@@ -47,7 +43,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         activeStyles: {
           transform: 'scale(0.95)',
         },
-        defaultGradient: { deg: 90, from: 'violet', to: 'blue' },
+        defaultGradient: { deg: 90, from: 'violet', to: 'indigo' },
         components: {
           Button: {
             styles: {

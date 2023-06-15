@@ -1,7 +1,7 @@
 import { createStyles, rem } from '@mantine/core'
 import dataCarousel from './layouts/carousel/data'
 
-const styleHomePage = createStyles({
+export default createStyles({
   carousel: {
     backgroundImage: `url(${dataCarousel.background})`,
     backgroundSize: 'cover',
@@ -13,5 +13,3 @@ const styleHomePage = createStyles({
     margin: `${rem(50)} 0`,
   },
 })
-
-export default styleHomePage
