@@ -97,9 +97,24 @@ export default function Header() {
             }}
           >
             <Tabs.List>
-              <Tabs.Tab value="/">Home</Tabs.Tab>
-              <Tabs.Tab value="account">Account</Tabs.Tab>
-              <Tabs.Tab value="shop">Shop</Tabs.Tab>
+              <Tabs.Tab
+                value="/"
+                onClick={() => setOpened((opened) => !opened)}
+              >
+                Home
+              </Tabs.Tab>
+              <Tabs.Tab
+                value="account"
+                onClick={() => setOpened((opened) => !opened)}
+              >
+                Account
+              </Tabs.Tab>
+              <Tabs.Tab
+                value="shop"
+                onClick={() => setOpened((opened) => !opened)}
+              >
+                Shop
+              </Tabs.Tab>
             </Tabs.List>
           </Tabs>
         </Container>

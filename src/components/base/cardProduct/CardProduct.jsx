@@ -15,14 +15,17 @@ import {
   Text,
   ThemeIcon,
 } from '@mantine/core'
-import dataCarousel from 'pages/home/components/carousel/data'
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import styleCardProduct from './style'
 import bgProduct from 'assets/img/bg-product.jpg'
+import { useHover } from '@mantine/hooks'
+import dataCarousel from '@/pages/home/layouts/carousel/data'
 
 export default function CardProduct({ maxWidth, height }) {
+  /* Hook Init */
+  const { hovered, ref } = useHover()
   /* Style */
   const { classes } = styleCardProduct()
   return (
@@ -70,16 +73,17 @@ export default function CardProduct({ maxWidth, height }) {
             </ThemeIcon>
             <Text fw={'bold'}>10.000</Text>
           </Group>
-          <Rating defaultValue={5} readOnly />
+          <Rating value={5} readOnly />
         </Group>
         <Button
+          ref={ref}
           variant="gradient"
           size="xs"
           mt={'sm'}
           fullWidth
           leftIcon={<FontAwesomeIcon icon={faCartPlus} />}
         >
-          <Text>Add To Cart</Text>
+          <Text>{hovered ? 'Add To Cart' : 'Category'}</Text>
         </Button>
       </Card>
     </>

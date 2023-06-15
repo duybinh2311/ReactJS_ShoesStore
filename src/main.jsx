@@ -58,6 +58,16 @@ ReactDOM.createRoot(document.getElementById('root')).render(
               },
             },
           },
+          Avatar: {
+            styles: (theme) => ({
+              root: {
+                border: `${theme.fn.rgba(
+                  theme.fn.primaryColor(),
+                  0.3
+                )} 2px solid`,
+              },
+            }),
+          },
         },
       }}
     >

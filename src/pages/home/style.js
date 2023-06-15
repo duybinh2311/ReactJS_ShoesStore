@@ -1,5 +1,5 @@
 import { createStyles, rem } from '@mantine/core'
-import dataCarousel from './components/carousel/data'
+import dataCarousel from './layouts/carousel/data'
 
 const styleHomePage = createStyles({
   carousel: {

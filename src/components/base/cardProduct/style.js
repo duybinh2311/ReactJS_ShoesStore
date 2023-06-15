@@ -17,7 +17,7 @@ const styleCardProduct = createStyles((theme) => ({
     },
   },
   image: {
-    transition: 'all 0.4s ease-in-out',
+    transition: 'all 0.6s ease',
     '&:hover': {
       transform: 'rotate(-5deg) scale(1.05)',
       filter: 'drop-shadow(5px 5px 10px #6741D9)',

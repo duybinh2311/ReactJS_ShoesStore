@@ -1,4 +1,4 @@
-import { Divider, Grid, MediaQuery, Space, Title } from '@mantine/core'
+import { Divider, Grid, MediaQuery, Title } from '@mantine/core'
 import CardProduct from 'components/base/cardProduct'
 import React from 'react'
 
@@ -7,7 +7,7 @@ export default function PopularProduct() {
     <>
       <Divider
         label={
-          <Title order={2} italic>
+          <Title order={2} italic mr={10}>
             Popular Product
           </Title>
         }

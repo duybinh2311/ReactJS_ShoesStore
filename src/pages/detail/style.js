@@ -1,17 +1,12 @@
-import { createStyles } from '@mantine/core'
+import { createStyles, rem } from '@mantine/core'
 
-const styleDetailProduct = createStyles((theme) => ({
+const styleDetailPage = createStyles((theme) => ({
   detailProduct: {
-    margin: `${theme.spacing.xl} 0`,
+    margin: `${rem(50)} 0`,
   },
-  likeIcon: {
-    backgroundColor: theme.colors.dark[5],
-    border: `1px solid ${theme.fn.primaryColor()}`,
-    transition: 'all 0.2s linear',
-    '&:hover': {
-      backgroundColor: theme.colors.dark[4],
-    },
+  relatedProduct: {
+    margin: `${theme.spacing.xl} 0`,
   },
 }))
 
-export default styleDetailProduct
+export default styleDetailPage

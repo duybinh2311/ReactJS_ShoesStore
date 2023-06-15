@@ -1,9 +1,9 @@
 import React from 'react'
 import useNaviProgress from 'hooks/useNaviProgress'
-import { Container, Group } from '@mantine/core'
+import { Container } from '@mantine/core'
 import styleHomePage from './style'
-import Carousel from './components/carousel'
-import PopularProduct from './components/popularProduct'
+import Carousel from './layouts/carousel/Carousel'
+import PopularProduct from './layouts/popularProduct/PopularProduct'
 
 export default function HomePage() {
   useNaviProgress()

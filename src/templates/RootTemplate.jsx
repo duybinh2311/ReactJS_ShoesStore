@@ -7,7 +7,13 @@ export default function RootTemplate() {
   return (
     <>
       <Header />
-      <Outlet />
+      <main
+        style={{
+          margin: '0 0 100px',
+        }}
+      >
+        <Outlet />
+      </main>
       <Footer />
     </>
   )
