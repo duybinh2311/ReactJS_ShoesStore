@@ -32,7 +32,7 @@ export default function DetailProduct() {
         <Stack justify="space-between" h={'100%'}>
           <Stack>
             <Group position="apart">
-              <Title order={2} italic>
+              <Title order={2} italic tt={'uppercase'}>
                 Product Name
               </Title>
               <ActionIcon

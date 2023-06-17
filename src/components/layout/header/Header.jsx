@@ -8,18 +8,21 @@ import {
   Group,
   Tabs,
   Title,
+  Transition,
 } from '@mantine/core'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { useClickOutside } from '@mantine/hooks'
 
 export default function Header() {
   /* Local State */
   const [opened, setOpened] = useState(false)
   const [scroll, setScroll] = useState(false)
+  const [activePage, setActivePage] = useState('/')
   /* Hook Init */
   const navigate = useNavigate()
-  const { tabValue } = useParams()
+  const clickOutSideRef = useClickOutside(() => setOpened(false))
   /* Style */
   const { classes, cx } = useStyles()
   /* Logic */
@@ -36,14 +39,19 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+  useEffect(() => {
+    navigate(activePage)
+  }, [activePage])
   return (
     <>
       <header
+        ref={clickOutSideRef}
         className={cx(classes.header, { [classes.headerActive]: scroll })}
       >
         <Container fluid>
           <Group position="apart">
             <Burger
+              display={'none'}
               opened={opened}
               onClick={() => setOpened((opened) => !opened)}
               className={classes.burger}
@@ -51,11 +59,10 @@ export default function Header() {
             <Tabs
               variant="pills"
               defaultValue="/"
-              value={tabValue}
-              onTabChange={(value) => navigate(value)}
+              value={activePage}
+              onTabChange={setActivePage}
               classNames={{
                 root: classes.tabs,
-                tabsList: classes.tabsList,
                 tab: classes.tab,
               }}
             >
@@ -64,6 +71,7 @@ export default function Header() {
                 <Tabs.Tab value="account">Account</Tabs.Tab>
                 <Tabs.Tab value="shop">Shop</Tabs.Tab>
                 <Tabs.Tab value="detail/productId=10">Detail</Tabs.Tab>
+                <Tabs.Tab value="cart">Cart</Tabs.Tab>
               </Tabs.List>
             </Tabs>
             <Title order={3} className={classes.title}>
@@ -84,40 +92,60 @@ export default function Header() {
               <FontAwesomeIcon icon={faHeart} className={classes.icon} beat />
             </Group>
           </Group>
-          <Tabs
-            variant="pills"
-            defaultValue="/"
-            value={tabValue}
-            onTabChange={(value) => navigate(value)}
-            display={opened ? 'block' : 'none'}
-            orientation="vertical"
-            classNames={{
-              root: classes.tabsActive,
-              tabsList: classes.tabsList,
-              tab: classes.tab,
-            }}
+          <Transition
+            transition={'slide-right'}
+            duration={300}
+            timingFunction="ease"
+            mounted={opened}
           >
-            <Tabs.List>
-              <Tabs.Tab
-                value="/"
-                onClick={() => setOpened((opened) => !opened)}
+            {(styles) => (
+              <Tabs
+                variant="pills"
+                style={{ ...styles }}
+                display={'none'}
+                value={activePage}
+                onTabChange={setActivePage}
+                orientation="vertical"
+                classNames={{
+                  root: classes.tabsActive,
+                  tab: classes.tab,
+                }}
               >
-                Home
-              </Tabs.Tab>
-              <Tabs.Tab
-                value="account"
-                onClick={() => setOpened((opened) => !opened)}
-              >
-                Account
-              </Tabs.Tab>
-              <Tabs.Tab
-                value="shop"
-                onClick={() => setOpened((opened) => !opened)}
-              >
-                Shop
-              </Tabs.Tab>
-            </Tabs.List>
-          </Tabs>
+                <Tabs.List>
+                  <Tabs.Tab
+                    value="/"
+                    onClick={() => setOpened((opened) => !opened)}
+                  >
+                    Home
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="account"
+                    onClick={() => setOpened((opened) => !opened)}
+                  >
+                    Account
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="shop"
+                    onClick={() => setOpened((opened) => !opened)}
+                  >
+                    Shop
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="detail/productId=10"
+                    onClick={() => setOpened((opened) => !opened)}
+                  >
+                    Detail
+                  </Tabs.Tab>
+                  <Tabs.Tab
+                    value="cart"
+                    onClick={() => setOpened((opened) => !opened)}
+                  >
+                    Cart
+                  </Tabs.Tab>
+                </Tabs.List>
+              </Tabs>
+            )}
+          </Transition>
         </Container>
       </header>
       {!scroll && <Divider />}

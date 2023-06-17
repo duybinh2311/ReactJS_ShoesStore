@@ -18,7 +18,7 @@ import CardProduct from 'components/base/cardProduct'
 export default function Profile() {
   return (
     <>
-      <Card withBorder padding="xl" radius="md" ta={'center'}>
+      <Card withBorder padding="xl" radius="md">
         <Card.Section
           sx={(theme) => ({
             background: theme.fn.radialGradient(
@@ -29,28 +29,34 @@ export default function Profile() {
             height: 140,
           })}
         />
-        <Tooltip
-          label={'Diamon Member'}
-          color="violet"
-          withArrow
-          position="top"
-          arrowSize={6}
-          offset={35}
-          transitionProps={{
-            transition: 'slide-left',
-            duration: 200,
-            timingFunction: 'ease',
-          }}
-        >
-          <Indicator inline label={<FontAwesomeIcon icon={faGem} />} size={24}>
-            <Avatar
-              src="https://i.pravatar.cc/1000?u=human_10pravatar.com"
-              size={80}
-              radius={80}
-              mt={-35}
-            />
-          </Indicator>
-        </Tooltip>
+        <Group position="center">
+          <Tooltip
+            label={'Diamon Member'}
+            color="violet"
+            withArrow
+            position="top"
+            arrowSize={6}
+            offset={35}
+            transitionProps={{
+              transition: 'slide-left',
+              duration: 200,
+              timingFunction: 'ease',
+            }}
+          >
+            <Indicator
+              inline
+              label={<FontAwesomeIcon icon={faGem} />}
+              size={24}
+            >
+              <Avatar
+                src="https://i.pravatar.cc/1000?u=human_10pravatar.com"
+                size={80}
+                radius={80}
+                mt={-35}
+              />
+            </Indicator>
+          </Tooltip>
+        </Group>
         <Group position="center" mb={'md'}>
           <Stack spacing={0}>
             <Text ta="center" fz="lg" fw={500} mt="sm" color="white">
@@ -80,10 +86,6 @@ export default function Profile() {
             {
               maxWidth: 'md',
               cols: 2,
-            },
-            {
-              maxWidth: 'sm',
-              cols: 1,
             },
           ]}
         >

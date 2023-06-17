@@ -7,7 +7,7 @@ export default function PopularProduct() {
     <>
       <Divider
         label={
-          <Title order={2} italic mr={10}>
+          <Title order={4} mr={10} tt={'uppercase'}>
             Popular Product
           </Title>
         }
