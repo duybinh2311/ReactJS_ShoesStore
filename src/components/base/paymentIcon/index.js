@@ -1,3 +1,3 @@
-import PaymentIcon from './PaymentIcon'
+import PaymentIcon from "./PaymentIcon";
 
 export default PaymentIcon

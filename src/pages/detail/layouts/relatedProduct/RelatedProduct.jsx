@@ -1,5 +1,5 @@
-import { Divider, Grid, Title } from '@mantine/core'
-import CardProduct from 'components/base/cardProduct'
+import { Divider, SimpleGrid, Title } from '@mantine/core'
+import CardProduct from 'components/base/CardProduct'
 import React from 'react'
 
 export default function RelatedProduct() {
@@ -11,20 +11,28 @@ export default function RelatedProduct() {
         mt={70}
         mb={'xl'}
       />
-      <Grid>
-        <Grid.Col sm={6} md={3}>
-          <CardProduct maxWidth={150} />
-        </Grid.Col>
-        <Grid.Col sm={6} md={3}>
-          <CardProduct maxWidth={150} />
-        </Grid.Col>
-        <Grid.Col sm={6} md={3}>
-          <CardProduct maxWidth={150} />
-        </Grid.Col>
-        <Grid.Col sm={6} md={3}>
-          <CardProduct maxWidth={150} />
-        </Grid.Col>
-      </Grid>
+      <SimpleGrid
+        cols={4}
+        breakpoints={[
+          {
+            maxWidth: 'lg',
+            cols: 3,
+          },
+          {
+            maxWidth: 'md',
+            cols: 2,
+          },
+          {
+            maxWidth: 'xs',
+            cols: 1,
+          },
+        ]}
+      >
+        <CardProduct maxWidth={150} />
+        <CardProduct maxWidth={150} />
+        <CardProduct maxWidth={150} />
+        <CardProduct maxWidth={150} />
+      </SimpleGrid>
     </>
   )
 }

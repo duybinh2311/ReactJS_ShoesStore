@@ -13,6 +13,11 @@ export default function SizeGroup() {
             key={index}
             variant={sizeClick === size ? 'filled' : 'outline'}
             color={sizeClick === size ? 'violet' : 'gray'}
+            sx={{
+              border: `1px solid ${
+                sizeClick === size ? 'transparent' : 'gray'
+              }`,
+            }}
             onClick={() => setSizeClick(size)}
           >
             <Text>{size}</Text>

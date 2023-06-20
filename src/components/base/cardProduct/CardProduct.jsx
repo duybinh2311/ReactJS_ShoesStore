@@ -21,7 +21,7 @@ import { NavLink } from 'react-router-dom'
 import bgProduct from 'assets/img/bg-product.jpg'
 import { useHover } from '@mantine/hooks'
 import useStyles from './CardProduct.style'
-import dataCarousel from 'pages/home/layouts/carousel/data'
+import dataCarousel from 'pages/Home/layouts/carousel/data'
 
 export default function CardProduct({ maxWidth, height }) {
   /* Hook Init */

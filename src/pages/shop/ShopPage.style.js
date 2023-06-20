@@ -9,7 +9,6 @@ export default createStyles((theme) => ({
       display: 'none',
     },
   },
-  tabsList: {},
   tab: {
     backgroundColor: theme.colors.gray[9],
     marginRight: 10,
@@ -21,6 +20,11 @@ export default createStyles((theme) => ({
     },
     '&:not([data-active]):hover': {
       backgroundColor: theme.colors.gray[7],
+    },
+  },
+  menu: {
+    [theme.fn.smallerThan('md')]: {
+      display: 'flex',
     },
   },
 }))

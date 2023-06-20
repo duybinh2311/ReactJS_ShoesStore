@@ -1,19 +1,16 @@
 import {
   Button,
   Container,
-  Divider,
   Grid,
   Group,
   Menu,
-  Navbar,
-  SegmentedControl,
   Tabs,
   Title,
 } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
 import React from 'react'
 import useStyles from './ShopPage.style'
-import CardProduct from 'components/base/cardProduct'
+import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
@@ -32,7 +29,6 @@ export default function ShopPage() {
                 h={'100%'}
                 classNames={{
                   root: classes.tabs,
-                  tabsList: classes.tabsList,
                   tab: classes.tab,
                 }}
               >
@@ -46,7 +42,7 @@ export default function ShopPage() {
                   <Tabs.Tab value="3">Filter 4</Tabs.Tab>
                 </Tabs.List>
               </Tabs>
-              <Group position="apart">
+              <Group position="apart" display={'none'} className={classes.menu}>
                 <Title order={4}>CATEGORIES</Title>
                 <Menu
                   withArrow

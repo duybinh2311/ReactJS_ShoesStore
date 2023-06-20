@@ -14,14 +14,20 @@ import { useNavigate } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons'
 import { useClickOutside } from '@mantine/hooks'
+import { useDispatch, useSelector } from 'react-redux'
+import { openLogin, openRegister } from 'services/redux/slices/modalSlice'
 
 export default function Header() {
   /* Local State */
   const [opened, setOpened] = useState(false)
   const [scroll, setScroll] = useState(false)
   const [activePage, setActivePage] = useState('/')
+  /* App State */
+  const openedLogin = useSelector(({ modalSlice }) => modalSlice.login)
+  const openedRegister = useSelector(({ modalSlice }) => modalSlice.register)
   /* Hook Init */
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const clickOutSideRef = useClickOutside(() => setOpened(false))
   /* Style */
   const { classes, cx } = useStyles()
@@ -78,10 +84,18 @@ export default function Header() {
               ReactJS - CapStone
             </Title>
             <Group>
-              <Button variant="gradient" radius={'md'}>
+              <Button
+                variant="gradient"
+                radius={'md'}
+                onClick={() => dispatch(openLogin(!openedLogin))}
+              >
                 Sign In
               </Button>
-              <Button variant="default" radius={'md'}>
+              <Button
+                variant="default"
+                radius={'md'}
+                onClick={() => dispatch(openRegister(!openedRegister))}
+              >
                 Sign Up
               </Button>
               <FontAwesomeIcon

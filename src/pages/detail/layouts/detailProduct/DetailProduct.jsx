@@ -10,17 +10,18 @@ import {
   Text,
   Title,
 } from '@mantine/core'
-import React from 'react'
+import React, { useState } from 'react'
 import product from 'assets/img/product1.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
-import QuantityInput from 'components/base/quantityInput'
-import PaymentIcon from 'components/base/paymentIcon'
-import AvatarCustomer from './components/AvatarCustomer'
-import SizeGroup from './components/SizeGroup'
+import { faHeart, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons'
+import PaymentIcon from 'components/base/PaymentIcon'
+import AvatarCustomer from '../../components/AvatarCustomer'
+import SizeGroup from '../../components/SizeGroup'
 import useStyles from './DetailProduct.style'
 
 export default function DetailProduct() {
+  /* Local State */
+  const [quantity, setQuantity] = useState(1)
   /* Style */
   const { classes } = useStyles()
   return (
@@ -56,12 +57,26 @@ export default function DetailProduct() {
             </Text>
             <SizeGroup />
             <Group>
-              <QuantityInput
-                min={1}
-                max={20}
-                className={classes.wrapQuantity}
-              />
-              <Button size="md" className={classes.btnAdd}>
+              <Group className={classes.wrapQuantity} position="apart">
+                <ActionIcon
+                  className={classes.controlQuantity}
+                  onClick={() => setQuantity((quantity) => quantity - 1)}
+                  disabled={quantity === 1}
+                >
+                  <FontAwesomeIcon icon={faMinus} />
+                </ActionIcon>
+                <Text ta="center" miw={20}>
+                  {quantity}
+                </Text>
+                <ActionIcon
+                  className={classes.controlQuantity}
+                  onClick={() => setQuantity((quantity) => quantity + 1)}
+                  disabled={quantity === 20}
+                >
+                  <FontAwesomeIcon icon={faPlus} />
+                </ActionIcon>
+              </Group>
+              <Button className={classes.btnAdd} tt={'uppercase'}>
                 Add To Cart
               </Button>
             </Group>

@@ -3,10 +3,10 @@ import React from 'react'
 
 const avatarData = [
   { name: 'Eva Elfie', email: 'human' },
-  { name: 'Eva Elfie', email: 'human_2' },
-  { name: 'Eva Elfie', email: 'human_3' },
-  { name: 'Eva Elfie', email: 'human_4' },
-  { name: 'Eva Elfie', email: 'human_5' },
+  { name: 'Melody Mark', email: 'human_2' },
+  { name: 'Blair Williams', email: 'human_3' },
+  { name: 'Eliza Ibarra', email: 'human_4' },
+  { name: 'Stella Cox', email: 'human_5' },
 ]
 
 export default function AvatarCustomer() {
@@ -34,7 +34,7 @@ export default function AvatarCustomer() {
         })}
         <Tooltip
           color="violet"
-          label="More than 9 other people have rated this product."
+          label="More than 9 other people have rated this product"
           multiline
           width={220}
           withArrow

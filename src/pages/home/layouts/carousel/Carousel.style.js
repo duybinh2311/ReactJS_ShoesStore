@@ -1,5 +1,5 @@
 import { createStyles, rem } from '@mantine/core'
-import moveY from 'utils/keyframes/moveY'
+import { moveY } from 'utils/keyframes'
 import dataCarousel from './data'
 
 export default createStyles((theme) => ({

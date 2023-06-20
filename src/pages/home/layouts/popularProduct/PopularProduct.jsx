@@ -1,5 +1,5 @@
 import { Divider, Grid, MediaQuery, Title } from '@mantine/core'
-import CardProduct from 'components/base/cardProduct'
+import CardProduct from 'components/base/CardProduct'
 import React from 'react'
 
 export default function PopularProduct() {
@@ -8,7 +8,7 @@ export default function PopularProduct() {
       <Divider
         label={
           <Title order={4} mr={10} tt={'uppercase'}>
-            Popular Product
+            Most Popular
           </Title>
         }
         labelPosition="left"
@@ -25,7 +25,7 @@ export default function PopularProduct() {
             margin: `${theme.spacing.md} 0`,
           })}
         >
-          <Title order={2} display={'none'}>
+          <Title order={2} display={'none'} tt={'uppercase'}>
             Hot Collection
           </Title>
         </MediaQuery>
