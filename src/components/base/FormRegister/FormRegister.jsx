@@ -12,7 +12,7 @@ import {
 import { useForm, yupResolver } from '@mantine/form'
 import { registerSchema } from 'services/yup/schema'
 import { useDisclosure } from '@mantine/hooks'
-import USER_API from 'services/api/user'
+import userAPI from 'services/api/userAPI'
 import { modals } from '@mantine/modals'
 import openLogin from '../FormLogin/openLogin'
 import openRegister from './openRegister'
@@ -41,13 +41,14 @@ export default function FormRegister() {
   /* Logic */
   const submitForm = (data) => {
     open()
-    USER_API.signup(data)
-      .then((data) => {
+    userAPI
+      .signup(data)
+      .then((result) => {
         modals.closeAll()
         modalMessage({
           btnTitle: 'Sign In',
           handle: openLogin,
-          message: data.message,
+          title: result.message,
         })
       })
       .catch((error) => {
@@ -55,7 +56,7 @@ export default function FormRegister() {
         modalMessage({
           btnTitle: 'Register',
           handle: openRegister,
-          message: error.message,
+          title: error.message,
         })
       })
       .finally(close)

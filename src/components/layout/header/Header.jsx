@@ -3,11 +3,9 @@ import useStyles from './Header.style'
 import { Burger, Container, Divider, Group } from '@mantine/core'
 import { useClickOutside } from '@mantine/hooks'
 import TabGroupVertical from './component/TabGroupVertical'
-import dataTab from './dataTab'
+import dataTab from './data'
 import TabGroup from './component/TabGroup'
 import ButtonSignInUp from './component/ButtonSignInUp'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons'
 import AvatarProfile from './component/AvatarProfile'
 
 export default function Header() {

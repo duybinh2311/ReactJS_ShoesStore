@@ -1,8 +1,7 @@
 import { Button, Group, Image, Stack, Text, Title } from '@mantine/core'
-import dataCarousel from 'pages/home/layouts/carousel/data'
 import React from 'react'
-import PropTypes from 'prop-types'
 import useStyles from './CartItem.style'
+import dataCarousel from 'pages/Home/layouts/carousel/data'
 
 export default function CartItem({ maxWidth }) {
   /* Styles */
@@ -46,6 +45,3 @@ export default function CartItem({ maxWidth }) {
   )
 }
 
-CartItem.propTypes = {
-  maxWidth: PropTypes.number,
-}

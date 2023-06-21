@@ -16,7 +16,6 @@ import {
   ThemeIcon,
 } from '@mantine/core'
 import React from 'react'
-import PropTypes from 'prop-types'
 import { NavLink } from 'react-router-dom'
 import bgProduct from 'assets/img/bg-product.jpg'
 import { useHover } from '@mantine/hooks'
@@ -88,9 +87,4 @@ export default function CardProduct({ maxWidth, height }) {
       </Card>
     </>
   )
-}
-
-CardProduct.propTypes = {
-  maxWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }

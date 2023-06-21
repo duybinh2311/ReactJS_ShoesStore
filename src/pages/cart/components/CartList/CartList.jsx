@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Badge, Stack } from '@mantine/core'
 import React from 'react'
 import CartItem from '../CartItem/CartItem'
-import PropTypes from 'prop-types'
 
 export default function CartList({ maxHeight, maxWidthItem }) {
   return (
@@ -42,7 +41,4 @@ export default function CartList({ maxHeight, maxWidthItem }) {
   )
 }
 
-CartList.propTypes = {
-  maxHeight: PropTypes.number,
-  maxWidthItem: PropTypes.number,
-}
+

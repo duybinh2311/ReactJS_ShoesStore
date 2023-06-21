@@ -1,10 +1,15 @@
 import React from 'react'
-import { Button, Group, Text } from '@mantine/core'
+import { Button, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
 
-export default function modalMessage({ message, handle, btnTitle }) {
+export default function modalMessage({ title, handle, btnTitle }) {
   return modals.open({
     centered: true,
+    withCloseButton: false,
+    overlayProps: {
+      blur: 5,
+      opacity: 0.7,
+    },
     transitionProps: {
       transition: 'scale',
       duration: 300,
@@ -13,7 +18,7 @@ export default function modalMessage({ message, handle, btnTitle }) {
     children: (
       <>
         <Text fw={'bold'} fz={18} ta={'center'} mb={20} color="white">
-          {message}
+          {title}
         </Text>
         <Button fullWidth onClick={handle}>
           {btnTitle}
