@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Root from 'templates/RootTemplate'
-import HomePage from 'pages/home'
+import HomePage from 'pages/Home'
 import AccountPage from 'pages/Account'
-import CartPage from 'pages/cart'
-import DetailPage from 'pages/detail'
-import ShopPage from 'pages/shop'
-import ErrorPage from 'pages/error'
+import CartPage from 'pages/Cart'
+import DetailPage from 'pages/Detail'
+import ShopPage from 'pages/Shop'
+import ErrorPage from 'pages/Error'
 
 const router = createBrowserRouter([
   {

@@ -29,9 +29,8 @@ export default createStyles((theme) => ({
   tab: {
     color: theme.white,
     fontWeight: 'bold',
-    marginRight: 10,
     position: 'relative',
-    transition: 'all 0.4s ease',
+    marginRight: 5,
     '&:not([data-active])': {
       '&:after': {
         content: "''",
@@ -43,25 +42,13 @@ export default createStyles((theme) => ({
         left: 0,
         transition: 'all 0.4s ease',
       },
-      '&:hover': {
-        '&:after': {
-          width: '100%',
-          background: theme.fn.gradient(),
-        },
+      '&:hover:after': {
+        width: '100%',
+        background: theme.fn.gradient(),
       },
     },
-    '&[data-active]': {
-      backgroundColor: theme.fn.primaryColor(),
-      color: theme.white,
-      ':hover': {
-        backgroundColor: theme.fn.darken(theme.fn.primaryColor(), 0.2),
-        color: theme.white,
-      },
-    },
-  },
-  title: {
-    [theme.fn.smallerThan('md')]: {
-      display: 'none',
+    '&[data-active]:hover': {
+      backgroundColor: theme.fn.darken(theme.fn.primaryColor(), 0.2),
     },
   },
   icon: {

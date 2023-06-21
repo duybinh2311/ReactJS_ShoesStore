@@ -1,33 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import useStyles from './Header.style'
-import {
-  Burger,
-  Button,
-  Container,
-  Divider,
-  Group,
-  Tabs,
-  Title,
-  Transition,
-} from '@mantine/core'
-import { useNavigate } from 'react-router-dom'
+import { Burger, Container, Divider, Group } from '@mantine/core'
+import { useClickOutside } from '@mantine/hooks'
+import TabGroupVertical from './component/TabGroupVertical'
+import dataTab from './dataTab'
+import TabGroup from './component/TabGroup'
+import ButtonSignInUp from './component/ButtonSignInUp'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartShopping, faHeart } from '@fortawesome/free-solid-svg-icons'
-import { useClickOutside } from '@mantine/hooks'
-import { useDispatch, useSelector } from 'react-redux'
-import { openLogin, openRegister } from 'services/redux/slices/modalSlice'
+import AvatarProfile from './component/AvatarProfile'
 
 export default function Header() {
   /* Local State */
   const [opened, setOpened] = useState(false)
   const [scroll, setScroll] = useState(false)
-  const [activePage, setActivePage] = useState('/')
-  /* App State */
-  const openedLogin = useSelector(({ modalSlice }) => modalSlice.login)
-  const openedRegister = useSelector(({ modalSlice }) => modalSlice.register)
   /* Hook Init */
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
   const clickOutSideRef = useClickOutside(() => setOpened(false))
   /* Style */
   const { classes, cx } = useStyles()
@@ -45,9 +32,6 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-  useEffect(() => {
-    navigate(activePage)
-  }, [activePage])
   return (
     <>
       <header
@@ -62,104 +46,16 @@ export default function Header() {
               onClick={() => setOpened((opened) => !opened)}
               className={classes.burger}
             />
-            <Tabs
-              variant="pills"
-              defaultValue="/"
-              value={activePage}
-              onTabChange={setActivePage}
-              classNames={{
-                root: classes.tabs,
-                tab: classes.tab,
-              }}
-            >
-              <Tabs.List>
-                <Tabs.Tab value="/">Home</Tabs.Tab>
-                <Tabs.Tab value="account">Account</Tabs.Tab>
-                <Tabs.Tab value="shop">Shop</Tabs.Tab>
-                <Tabs.Tab value="detail/productId=10">Detail</Tabs.Tab>
-                <Tabs.Tab value="cart">Cart</Tabs.Tab>
-              </Tabs.List>
-            </Tabs>
-            <Title order={3} className={classes.title}>
-              ReactJS - CapStone
-            </Title>
-            <Group>
-              <Button
-                variant="gradient"
-                radius={'md'}
-                onClick={() => dispatch(openLogin(!openedLogin))}
-              >
-                Sign In
-              </Button>
-              <Button
-                variant="default"
-                radius={'md'}
-                onClick={() => dispatch(openRegister(!openedRegister))}
-              >
-                Sign Up
-              </Button>
-              <FontAwesomeIcon
-                icon={faCartShopping}
-                className={classes.icon}
-                bounce
-              />
-              <FontAwesomeIcon icon={faHeart} className={classes.icon} beat />
-            </Group>
+            <TabGroup classes={classes} data={dataTab} />
+            <ButtonSignInUp classes={classes} />
+            <AvatarProfile classes={classes} />
           </Group>
-          <Transition
-            transition={'slide-right'}
-            duration={300}
-            timingFunction="ease"
-            mounted={opened}
-          >
-            {(styles) => (
-              <Tabs
-                variant="pills"
-                style={{ ...styles }}
-                display={'none'}
-                value={activePage}
-                onTabChange={setActivePage}
-                orientation="vertical"
-                classNames={{
-                  root: classes.tabsActive,
-                  tab: classes.tab,
-                }}
-              >
-                <Tabs.List>
-                  <Tabs.Tab
-                    value="/"
-                    onClick={() => setOpened((opened) => !opened)}
-                  >
-                    Home
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    value="account"
-                    onClick={() => setOpened((opened) => !opened)}
-                  >
-                    Account
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    value="shop"
-                    onClick={() => setOpened((opened) => !opened)}
-                  >
-                    Shop
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    value="detail/productId=10"
-                    onClick={() => setOpened((opened) => !opened)}
-                  >
-                    Detail
-                  </Tabs.Tab>
-                  <Tabs.Tab
-                    value="cart"
-                    onClick={() => setOpened((opened) => !opened)}
-                  >
-                    Cart
-                  </Tabs.Tab>
-                </Tabs.List>
-              </Tabs>
-            )}
-          </Transition>
+          <TabGroupVertical
+            opened={opened}
+            setOpened={setOpened}
+            classes={classes}
+            data={dataTab}
+          />
         </Container>
       </header>
       {!scroll && <Divider />}

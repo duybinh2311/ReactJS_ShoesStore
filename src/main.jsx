@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import router from 'router/router'
-import { MantineProvider } from '@mantine/core'
+import { Button, MantineProvider, Text } from '@mantine/core'
 import { NavigationProgress } from '@mantine/nprogress'
 import { RouterProvider } from 'react-router-dom'
 import { ripple } from 'utils/keyframes'
-import 'assets/scss/index.scss'
 import { Provider } from 'react-redux'
 import store from 'services/redux/configStore'
+import { ModalsProvider } from '@mantine/modals'
+import 'assets/scss/index.scss'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -70,8 +71,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           },
         }}
       >
-        <NavigationProgress autoReset={true} />
-        <RouterProvider router={router} />
+        <ModalsProvider>
+          <NavigationProgress autoReset={true} />
+          <RouterProvider router={router} />
+        </ModalsProvider>
       </MantineProvider>
     </Provider>
   </React.StrictMode>

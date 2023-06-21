@@ -37,7 +37,7 @@ export default function CardProduct({ maxWidth, height }) {
           bgp={'center'}
           bgsz={'cover'}
         >
-          <NavLink>
+          <NavLink to={'/detail/productId=10'}>
             <Image
               src={dataCarousel.productItem[1]}
               py={10}

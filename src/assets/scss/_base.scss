@@ -15,3 +15,10 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #845ef7;
 }
+
+.active .mantine-Tabs-tab {
+  background-color: #6741d9;
+  &::after {
+    content: none;
+  }
+}
