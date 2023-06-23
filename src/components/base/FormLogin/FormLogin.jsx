@@ -1,19 +1,26 @@
-import React, { useEffect } from 'react'
-import { Button, LoadingOverlay, Stack, Text, TextInput } from '@mantine/core'
+import React from 'react'
+import {
+  Button,
+  LoadingOverlay,
+  NumberInput,
+  PasswordInput,
+  Stack,
+  Text,
+  TextInput,
+} from '@mantine/core'
 import { useForm, yupResolver } from '@mantine/form'
 import { loginSchema } from 'services/yup/schema'
-import { useDispatch, useSelector } from 'react-redux'
-import USER_API from 'services/api/userAPI'
-import { userLogin, userProfile } from 'services/redux/slices/userSlice'
-import storage from 'utils/storage'
-import { TOKEN } from 'utils/constant'
+import { useDispatch } from 'react-redux'
+import userAPI from 'services/api/userAPI'
+import { toast } from 'react-hot-toast'
+import { useDisclosure } from '@mantine/hooks'
+import { userAction } from 'services/redux/slices/userSlice'
+import { modals } from '@mantine/modals'
 import userThunk from 'services/redux/thunk/userThunk'
 
 export default function FormLogin() {
-  /* App State */
-  const visible = useSelector(({ user }) => user.isLoading)
-  const userLogin = useSelector(({ user }) => user.userLogin)
   /* Hook Init */
+  const [visible, { open, close }] = useDisclosure(false)
   const dispatch = useDispatch()
   const form = useForm({
     initialValues: {
@@ -31,15 +38,22 @@ export default function FormLogin() {
   })
   /* Logic */
   const submitForm = (data) => {
-    const action = userThunk.signin(data)
-    dispatch(action)
+    toast.dismiss()
+    open()
+    const result = userAPI.signin(data).finally(close)
+    toast.promise(result, {
+      loading: 'Loading',
+      success: (data) => {
+        const userLogin = userAction.login(data.content)
+        dispatch(userLogin)
+        dispatch(userThunk.getProfile())
+        dispatch(userThunk.getProductLike())
+        modals.closeAll()
+        return `${data.message}`
+      },
+      error: (err) => `${err.message}`,
+    })
   }
-  useEffect(() => {
-    if (storage.get(TOKEN)) {
-      const action = userThunk.getProfile()
-      dispatch(action)
-    }
-  }, [userLogin])
   return (
     <>
       <LoadingOverlay visible={visible} overlayBlur={2} />
@@ -49,7 +63,7 @@ export default function FormLogin() {
       <form onSubmit={form.onSubmit((data) => submitForm(data))}>
         <Stack>
           <TextInput {...form.getInputProps('email')} label="Email" />
-          <TextInput {...form.getInputProps('password')} label="Password" />
+          <PasswordInput {...form.getInputProps('password')} label="Password" />
           <Button type="submit" mt={10}>
             Sign In
           </Button>

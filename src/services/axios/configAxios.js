@@ -1,31 +1,38 @@
 import axios from 'axios'
-import { TOKEN } from 'utils/constant'
+import jwtDecode from 'jwt-decode'
+import { USER_LOGIN, USER_PROFILE } from 'utils/constant'
 import storage from 'utils/storage'
 
+/* Instance Axios */
 const SHOES_API_URL = 'https://shop.cyberlearn.vn/api/'
-
 const shoesAPI = axios.create({
   baseURL: SHOES_API_URL,
   timeout: 30000,
 })
 
+/* Config Request */
 shoesAPI.interceptors.request.use((config) => {
-  if (storage.get(TOKEN)) {
-    const token = storage.get(TOKEN)
-    config.headers.Authorization = `Bearer ${token}`
+  const token = storage.get(USER_LOGIN)?.accessToken
+  if (token) {
+    const decodedToken = jwtDecode(token)
+    const currentDate = new Date()
+    if (decodedToken.exp * 1000 < currentDate.getTime()) {
+      storage.clear(USER_LOGIN)
+      storage.clear(USER_PROFILE)
+    } else {
+      config.headers.Authorization = `Bearer ${token}`
+    }
   }
   return config
 })
 
-shoesAPI.interceptors.response.use(
-  async (response) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    return response
-  },
-  async (error) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    throw error.response?.data
-  }
-)
+/* Config Response */
+const responseSucces = (response) => {
+  return response
+}
+const responseError = (error) => {
+  throw error.response?.data
+}
+shoesAPI.interceptors.response.use(responseSucces, responseError)
 
 export default shoesAPI

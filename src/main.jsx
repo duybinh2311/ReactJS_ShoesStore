@@ -9,6 +9,7 @@ import { Provider } from 'react-redux'
 import store from 'services/redux/configStore'
 import { ModalsProvider } from '@mantine/modals'
 import 'assets/scss/index.scss'
+import { Toaster } from 'react-hot-toast'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -72,6 +73,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         }}
       >
         <ModalsProvider>
+          <Toaster />
           <NavigationProgress autoReset={true} />
           <RouterProvider router={router} />
         </ModalsProvider>

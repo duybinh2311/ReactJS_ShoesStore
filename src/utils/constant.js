@@ -1,4 +1,5 @@
-export const { USER_LOGIN, TOKEN } = {
+export const { USER_LOGIN, USER_PROFILE, USER_PRODUCT_LIKE } = {
   USER_LOGIN: 'userLogin',
-  TOKEN: 'accessToken',
+  USER_PROFILE: 'userProfile',
+  USER_PRODUCT_LIKE: 'userProductLike',
 }

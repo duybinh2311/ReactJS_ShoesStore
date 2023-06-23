@@ -14,9 +14,8 @@ import { registerSchema } from 'services/yup/schema'
 import { useDisclosure } from '@mantine/hooks'
 import userAPI from 'services/api/userAPI'
 import { modals } from '@mantine/modals'
+import { toast } from 'react-hot-toast'
 import openLogin from '../FormLogin/openLogin'
-import openRegister from './openRegister'
-import modalMessage from 'components/HOC/modalMessage'
 
 export default function FormRegister() {
   /* Hook Init */
@@ -40,26 +39,18 @@ export default function FormRegister() {
   })
   /* Logic */
   const submitForm = (data) => {
+    toast.dismiss()
     open()
-    userAPI
-      .signup(data)
-      .then((result) => {
+    const result = userAPI.signup(data).finally(close)
+    toast.promise(result, {
+      loading: 'Loading',
+      success: (data) => {
         modals.closeAll()
-        modalMessage({
-          btnTitle: 'Sign In',
-          handle: openLogin,
-          title: result.message,
-        })
-      })
-      .catch((error) => {
-        modals.closeAll()
-        modalMessage({
-          btnTitle: 'Register',
-          handle: openRegister,
-          title: error.message,
-        })
-      })
-      .finally(close)
+        openLogin()
+        return `${data.message}`
+      },
+      error: (err) => `${err.message}`,
+    })
   }
   return (
     <>

@@ -1,25 +1,46 @@
 import shoesAPI from 'services/axios/configAxios'
-import { TOKEN } from 'utils/constant'
+import { USER_LOGIN, USER_PRODUCT_LIKE, USER_PROFILE } from 'utils/constant'
 import storage from 'utils/storage'
 
-const URL = {
-  userSignUp: 'Users/signup',
-  userSignIn: 'Users/signin',
-  userGetProfile: 'Users/getProfile',
+const USER_URL = {
+  signup: 'Users/signup',
+  signin: 'Users/signin',
+  getProfile: 'Users/getProfile',
+  getProductLike: 'Users/getproductfavorite',
 }
 
 const userAPI = {
   signup: async (data) => {
-    const result = await shoesAPI.post(URL.userSignUp, data)
-    return result
+    try {
+      const result = await shoesAPI.post(USER_URL.signup, data)
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      return result.data
+    } catch (error) {
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      throw error
+    }
   },
   signin: async (data) => {
-    const result = await shoesAPI.post(URL.userSignIn, data)
-    storage.save(TOKEN, result.data.content.accessToken)
-    return result.data.content
+    try {
+      const result = await shoesAPI.post(USER_URL.signin, data)
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      storage.save(USER_LOGIN, result.data.content)
+      return result.data
+    } catch (error) {
+      await new Promise((resolve) => setTimeout(resolve, 1500))
+      throw error
+    }
   },
   getProfile: async () => {
-    const result = await shoesAPI.post(URL.userGetProfile)
+    const result = await shoesAPI.post(USER_URL.getProfile)
+    const { name, email, phone, avatar } = result.data.content
+    const userProfile = { name, email, phone, avatar }
+    storage.save(USER_PROFILE, userProfile)
+    return userProfile
+  },
+  getProductLike: async () => {
+    const result = await shoesAPI.get(USER_URL.getProductLike)
+    storage.save(USER_PRODUCT_LIKE, result.data.content)
     return result.data.content
   },
 }

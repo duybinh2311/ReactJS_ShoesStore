@@ -1,50 +1,37 @@
-import { modals } from '@mantine/modals'
 import { createSlice } from '@reduxjs/toolkit'
-import modalMessage from 'components/HOC/modalMessage'
-import openLogin from 'components/base/FormLogin/openLogin'
 import userThunk from '../thunk/userThunk'
+import storage from 'utils/storage'
+import { USER_LOGIN, USER_PRODUCT_LIKE, USER_PROFILE } from 'utils/constant'
 
 const initialState = {
-  userLogin: {},
-  userProfile: {},
-  isLoading: false,
+  userLogin: storage.get(USER_LOGIN) || {},
+  userProfile: storage.get(USER_PROFILE) || {},
+  userProductLike: storage.get(USER_PRODUCT_LIKE) || {},
 }
 
 const userSlice = createSlice({
   name: 'userSlice',
   initialState,
   reducers: {
-    userLogin: (state, action) => {
+    login: (state, action) => {
       state.userLogin = action.payload
     },
-    userProfile: (state, action) => {
-      state.userProfile = action.payload
+    reset: (state) => {
+      state.userLogin = {}
+      state.userProfile = {}
+      state.userProductLike = {}
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(userThunk.signin.pending, (state) => {
-      state.isLoading = true
-    })
-    builder.addCase(userThunk.signin.fulfilled, (state, action) => {
-      state.userLogin = action.payload
-      state.isLoading = false
-      modals.closeAll()
-    })
-    builder.addCase(userThunk.signin.rejected, (state, action) => {
-      state.isLoading = false
-      modals.closeAll()
-      modalMessage({
-        btnTitle: 'OK',
-        handle: openLogin,
-        title: action.error.message,
-      })
-    })
     builder.addCase(userThunk.getProfile.fulfilled, (state, action) => {
       state.userProfile = action.payload
+    })
+    builder.addCase(userThunk.getProductLike.fulfilled, (state, action) => {
+      state.userProductLike = action.payload
     })
   },
 })
 
-export const { userLogin, userProfile } = userSlice.actions
+export const userAction = userSlice.actions
 
 export default userSlice.reducer

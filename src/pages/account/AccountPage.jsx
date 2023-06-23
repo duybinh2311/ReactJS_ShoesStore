@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   Card,
   Container,
   Divider,
@@ -12,16 +11,30 @@ import {
   Tooltip,
 } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
-import React from 'react'
+import React, { useEffect } from 'react'
 import useStyles from './AccountPage.style'
 import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from '@fortawesome/free-solid-svg-icons'
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 export default function AccountPage() {
   useNaviProgress()
+  /* App State */
+  const { userProfile } = useSelector((state) => state.user)
+  /* Hook Init */
+  const navigate = useNavigate()
   /* Style */
   const { classes } = useStyles()
+  /* Logic */
+  useEffect(() => {
+    if (!('name' in userProfile)) {
+      navigate('/')
+      toast.error('You are not logged in')
+    }
+  })
   return (
     <>
       <section className={classes.profile}>
@@ -57,7 +70,7 @@ export default function AccountPage() {
                   size={24}
                 >
                   <Avatar
-                    src="https://i.pravatar.cc/1000?u=human_10pravatar.com"
+                    src={userProfile.avatar}
                     size={80}
                     radius={80}
                     mt={-35}
@@ -68,10 +81,10 @@ export default function AccountPage() {
             <Group position="center" mb={'md'}>
               <Stack spacing={0}>
                 <Text ta="center" fz="lg" fw={500} mt="sm" color="white">
-                  Nguyễn Duy Bình
+                  {userProfile.name}
                 </Text>
                 <Text ta="center" fz="sm" c="dimmed">
-                  duybinh@gmail.com
+                  {userProfile.email}
                 </Text>
               </Stack>
             </Group>
@@ -106,9 +119,6 @@ export default function AccountPage() {
               <CardProduct maxWidth={150} />
               <CardProduct maxWidth={150} />
             </SimpleGrid>
-            <Button fullWidth radius="md" mt="xl" size="md">
-              Logout
-            </Button>
           </Card>
         </Container>
       </section>

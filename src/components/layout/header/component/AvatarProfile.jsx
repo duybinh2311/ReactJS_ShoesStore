@@ -7,8 +7,22 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Group, Indicator, Menu } from '@mantine/core'
 import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { USER_LOGIN, USER_PROFILE } from 'utils/constant'
+import { userAction } from 'services/redux/slices/userSlice'
+import storage from 'utils/storage'
 
-export default function AvatarProfile({ classes }) {
+export default function AvatarProfile({ classes, user }) {
+  /* App State */
+  const { userProfile } = useSelector((state) => state.user)
+  /* Hook Init */
+  const dispatch = useDispatch()
+  /* Logic */
+  const logoutAccount = () => {
+    storage.clear(USER_LOGIN)
+    storage.clear(USER_PROFILE)
+    dispatch(userAction.reset())
+  }
   return (
     <Group>
       <Menu trigger="click" withArrow>
@@ -16,7 +30,7 @@ export default function AvatarProfile({ classes }) {
           <Indicator withBorder processing color="green" size={12} offset={5}>
             <Avatar
               radius={'xl'}
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=250&q=80"
+              src={userProfile.avatar}
               style={{
                 cursor: 'pointer',
               }}
@@ -24,7 +38,7 @@ export default function AvatarProfile({ classes }) {
           </Indicator>
         </Menu.Target>
         <Menu.Dropdown>
-          <Menu.Label>Nguyễn Duy Bình</Menu.Label>
+          <Menu.Label>{user.email}</Menu.Label>
           <NavLink to={'/account'}>
             <Menu.Item icon={<FontAwesomeIcon icon={faUser} />}>
               View Profile
@@ -36,7 +50,7 @@ export default function AvatarProfile({ classes }) {
             </Menu.Item>
           </NavLink>
           <Menu.Divider />
-          <Menu.Item>Log out</Menu.Item>
+          <Menu.Item onClick={logoutAccount}>Log out</Menu.Item>
         </Menu.Dropdown>
       </Menu>
       <Indicator label="12" color="red">

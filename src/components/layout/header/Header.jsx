@@ -7,11 +7,14 @@ import dataTab from './data'
 import TabGroup from './component/TabGroup'
 import ButtonSignInUp from './component/ButtonSignInUp'
 import AvatarProfile from './component/AvatarProfile'
+import { useSelector } from 'react-redux'
 
 export default function Header() {
   /* Local State */
   const [opened, setOpened] = useState(false)
   const [scroll, setScroll] = useState(false)
+  /* App State */
+  const { userLogin } = useSelector((state) => state.user)
   /* Hook Init */
   const clickOutSideRef = useClickOutside(() => setOpened(false))
   /* Style */
@@ -45,8 +48,11 @@ export default function Header() {
               className={classes.burger}
             />
             <TabGroup classes={classes} data={dataTab} />
-            <ButtonSignInUp classes={classes} />
-            <AvatarProfile classes={classes} />
+            {userLogin.email ? (
+              <AvatarProfile classes={classes} user={userLogin} />
+            ) : (
+              <ButtonSignInUp />
+            )}
           </Group>
           <TabGroupVertical
             opened={opened}
