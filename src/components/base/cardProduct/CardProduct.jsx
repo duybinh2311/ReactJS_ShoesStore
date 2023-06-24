@@ -18,72 +18,83 @@ import {
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import bgProduct from 'assets/img/bg-product.jpg'
-import { useHover } from '@mantine/hooks'
 import useStyles from './CardProduct.style'
-import dataCarousel from 'pages/Home/layouts/carousel/data'
+import Skeleton from 'react-loading-skeleton'
 
-export default function CardProduct({ maxWidth, height }) {
-  /* Hook Init */
-  const { hovered, ref } = useHover()
+export default function CardProduct({ maxWidth, product }) {
   /* Style */
   const { classes } = useStyles()
   return (
     <>
-      <Card withBorder radius={'md'} h={height}>
+      <Card withBorder radius={'md'} pt={0}>
         <Card.Section
           className={classes.cardSection}
           bg={`url(${bgProduct})`}
           bgp={'center'}
           bgsz={'cover'}
         >
-          <NavLink to={'/detail/productId=10'}>
-            <Image
-              src={dataCarousel.productItem[1]}
-              py={10}
-              mx={'auto'}
-              maw={maxWidth}
-              classNames={{
-                image: classes.image,
+          {product ? (
+            <NavLink to={'/detail/productId=10'}>
+              <Image
+                src={product.image}
+                py={10}
+                mx={'auto'}
+                maw={maxWidth}
+                classNames={{
+                  image: classes.image,
+                }}
+              />
+            </NavLink>
+          ) : (
+            <Skeleton
+              style={{
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
               }}
+              height={200}
             />
-          </NavLink>
+          )}
         </Card.Section>
         <Badge
           className={classes.badgeTop}
           variant="gradient"
           gradient={{ from: 'red', to: 'yellow' }}
         >
-          new release
+          best seller
         </Badge>
         <ActionIcon className={classes.likeIcon}>
           <FontAwesomeIcon icon={faHeart} />
         </ActionIcon>
         <Text fw={500} mt={'sm'}>
-          <NavLink className={classes.title}>Product Name</NavLink>
+          <NavLink className={classes.title}>
+            {product?.name || <Skeleton />}
+          </NavLink>
         </Text>
         <Text fz={'sm'} color="dimmed" lineClamp={2}>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-          atque magnam velit possimus quia maiores.
+          {product?.description || <Skeleton count={2} />}
         </Text>
         <Group position="apart" mt={'sm'}>
           <Group>
             <ThemeIcon>
               <FontAwesomeIcon icon={faDollarSign} />
             </ThemeIcon>
-            <Text fw={'bold'}>10.000</Text>
+            <Text fw={'bold'}>{product?.price || <Skeleton width={50} />}</Text>
           </Group>
           <Rating value={5} readOnly />
         </Group>
-        <Button
-          ref={ref}
-          variant="gradient"
-          size="xs"
-          mt={'sm'}
-          fullWidth
-          leftIcon={<FontAwesomeIcon icon={faCartPlus} />}
-        >
-          <Text>{hovered ? 'Add To Cart' : 'Category'}</Text>
-        </Button>
+        {product ? (
+          <Button
+            variant="gradient"
+            size="xs"
+            mt={'sm'}
+            fullWidth
+            leftIcon={<FontAwesomeIcon icon={faCartPlus} />}
+          >
+            Add To Cart
+          </Button>
+        ) : (
+          <Skeleton style={{ marginTop: 10 }} height={30} />
+        )}
       </Card>
     </>
   )

@@ -19,6 +19,7 @@ import { faGem } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
+import openLogin from 'components/base/FormLogin/openLogin'
 
 export default function AccountPage() {
   useNaviProgress()
@@ -32,9 +33,14 @@ export default function AccountPage() {
   useEffect(() => {
     if (!('name' in userProfile)) {
       navigate('/')
-      toast.error('You are not logged in')
     }
-  })
+    return () => {
+      if (!('name' in userProfile)) {
+        toast.error('You are not logged in')
+        openLogin()
+      }
+    }
+  }, [userProfile])
   return (
     <>
       <section className={classes.profile}>

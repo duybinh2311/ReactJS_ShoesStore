@@ -8,7 +8,7 @@ import {
   Title,
 } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
-import React from 'react'
+import React, { useState } from 'react'
 import useStyles from './ShopPage.style'
 import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,6 +16,8 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 
 export default function ShopPage() {
   useNaviProgress()
+  /* Local State */
+  const [productList, setProductList] = useState([])
   /* Style */
   const { classes } = useStyles()
   return (

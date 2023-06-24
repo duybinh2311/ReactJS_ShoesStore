@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Avatar, Group, Indicator, Menu } from '@mantine/core'
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { USER_LOGIN, USER_PROFILE } from 'utils/constant'
+import { USER_LOGIN, USER_PRODUCT_LIKE, USER_PROFILE } from 'utils/constant'
 import { userAction } from 'services/redux/slices/userSlice'
 import storage from 'utils/storage'
 
@@ -21,6 +21,7 @@ export default function AvatarProfile({ classes, user }) {
   const logoutAccount = () => {
     storage.clear(USER_LOGIN)
     storage.clear(USER_PROFILE)
+    storage.clear(USER_PRODUCT_LIKE)
     dispatch(userAction.reset())
   }
   return (

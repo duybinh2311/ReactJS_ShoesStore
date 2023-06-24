@@ -1,8 +1,76 @@
-import { Divider, Grid, MediaQuery, Title } from '@mantine/core'
+import { Card, Divider, Grid, Image, MediaQuery, Title } from '@mantine/core'
 import CardProduct from 'components/base/CardProduct'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import productAPI from 'services/api/productAPI'
+import shoesArt from 'assets/img/shoes-art.jpg'
+import Skeleton from 'react-loading-skeleton'
+import { NavLink } from 'react-router-dom'
 
 export default function PopularProduct() {
+  /* Local State */
+  const [popularProducts, setPopularProducts] = useState(Array(4).fill())
+  /* Logic */
+  const renderBannerArt = () => {
+    if (!popularProducts[0]) {
+      return (
+        <Skeleton
+          height={'100%'}
+          style={{
+            display: 'block',
+          }}
+        />
+      )
+    } else {
+      return (
+        <NavLink to={'/shop'}>
+          <Image
+            src={shoesArt}
+            fit="cover"
+            height={'100%'}
+            styles={{
+              root: {
+                height: '100%',
+              },
+              imageWrapper: {
+                height: '100%',
+              },
+              figure: {
+                height: '100%',
+              },
+              image: {
+                '&:hover': {
+                  transition: 'all ease 4s',
+                  transform: 'scale(1.2)',
+                },
+              },
+            }}
+          />
+        </NavLink>
+      )
+    }
+  }
+  const renderPopularProduct = () => {
+    return popularProducts.map((prod, index) => {
+      return (
+        <Grid.Col xs={6} key={index}>
+          <CardProduct maxWidth={150} product={prod} />
+        </Grid.Col>
+      )
+    })
+  }
+  useEffect(() => {
+    productAPI.getAll().then((data) => {
+      const dataCoppy = [...data]
+      const productList = popularProducts.map(() => {
+        const iRandom = Math.floor(Math.random() * dataCoppy.length)
+        const prodRandom = dataCoppy[iRandom]
+        dataCoppy.splice(iRandom, 1)
+        return prodRandom
+      })
+      setPopularProducts(productList)
+    })
+  }, [])
   return (
     <>
       <Divider
@@ -16,7 +84,9 @@ export default function PopularProduct() {
       />
       <Grid justify="center">
         <Grid.Col lg={6} md={5}>
-          <CardProduct maxWidth={520} height={'100%'} />
+          <Card h={'100%'} mih={300} p={0}>
+            {renderBannerArt()}
+          </Card>
         </Grid.Col>
         <MediaQuery
           query="(max-width: 992px)"
@@ -30,20 +100,7 @@ export default function PopularProduct() {
           </Title>
         </MediaQuery>
         <Grid.Col lg={6} md={7}>
-          <Grid>
-            <Grid.Col xs={6}>
-              <CardProduct maxWidth={150} />
-            </Grid.Col>
-            <Grid.Col xs={6}>
-              <CardProduct maxWidth={150} />
-            </Grid.Col>
-            <Grid.Col xs={6}>
-              <CardProduct maxWidth={150} />
-            </Grid.Col>
-            <Grid.Col xs={6}>
-              <CardProduct maxWidth={150} />
-            </Grid.Col>
-          </Grid>
+          <Grid>{renderPopularProduct()}</Grid>
         </Grid.Col>
       </Grid>
     </>
