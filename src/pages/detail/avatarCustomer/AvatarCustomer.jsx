@@ -1,4 +1,5 @@
 import { Avatar, Tooltip } from '@mantine/core'
+import { randomId } from '@mantine/hooks'
 import React from 'react'
 
 const avatarData = [
@@ -13,13 +14,13 @@ export default function AvatarCustomer() {
   return (
     <Tooltip.Group>
       <Avatar.Group spacing={'sm'}>
-        {avatarData.map((customer, index) => {
+        {avatarData.map((customer) => {
           return (
             <Tooltip
               color="violet"
               label={customer.name}
               withArrow
-              key={index}
+              key={randomId()}
               transitionProps={{
                 transition: 'scale',
                 duration: 300,

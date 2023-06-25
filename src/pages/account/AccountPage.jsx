@@ -15,14 +15,14 @@ import React, { useEffect, useState } from 'react'
 import useStyles from './AccountPage.style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from '@fortawesome/free-solid-svg-icons'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import productAPI from 'services/api/productAPI'
 import CardProduct from 'components/cardProduct/CardProduct'
 import openLogin from 'components/formLogin/openLogin'
 import useExpiredToken from 'hooks/useExpiredToken'
-import { userAction } from 'services/redux/slices/userSlice'
+import { randomId } from '@mantine/hooks'
 
 export default function AccountPage() {
   useNaviProgress()
@@ -38,8 +38,7 @@ export default function AccountPage() {
   /* Logic */
   const renderProduct = () => {
     return productList.map((prod) => {
-      const key = crypto.randomUUID()
-      return <CardProduct key={key} maxWidth={150} product={prod} />
+      return <CardProduct key={randomId()} maxWidth={150} product={prod} />
     })
   }
   useEffect(() => {

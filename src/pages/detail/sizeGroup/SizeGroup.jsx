@@ -1,4 +1,5 @@
 import { ActionIcon, Group, Text } from '@mantine/core'
+import { randomId } from '@mantine/hooks'
 import React, { useState } from 'react'
 
 export default function SizeGroup() {
@@ -7,10 +8,10 @@ export default function SizeGroup() {
   const sizes = [36, 37, 38, 39, 40, 41, 42, 43]
   return (
     <Group>
-      {sizes.map((size, index) => {
+      {sizes.map((size) => {
         return (
           <ActionIcon
-            key={index}
+            key={randomId()}
             variant={sizeClick === size ? 'filled' : 'outline'}
             color={sizeClick === size ? 'violet' : 'gray'}
             sx={{

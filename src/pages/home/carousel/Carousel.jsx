@@ -3,6 +3,7 @@ import Slider from 'react-slick'
 import dataCarousel from './data'
 import useStyles from './Carousel.style'
 import { Container, Group, Image } from '@mantine/core'
+import { randomId } from '@mantine/hooks'
 
 export default function Carousel() {
   /* Local State */
@@ -18,9 +19,8 @@ export default function Carousel() {
         arrows={false}
       >
         {dataCarousel.productItem.map((item) => {
-          const key = crypto.randomUUID()
           return (
-            <Group key={key}>
+            <Group key={randomId()}>
               <Image
                 src={item}
                 classNames={{

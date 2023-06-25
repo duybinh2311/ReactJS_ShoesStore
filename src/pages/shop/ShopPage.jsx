@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import CardProduct from 'components/cardProduct/CardProduct'
 import productAPI from 'services/api/productAPI'
+import { randomId } from '@mantine/hooks'
 
 export default function ShopPage() {
   useNaviProgress()
@@ -24,9 +25,8 @@ export default function ShopPage() {
   /* Logic */
   const renderProduct = () => {
     return productList.map((prod) => {
-      const key = crypto.randomUUID()
       return (
-        <Grid.Col key={key} span={12} sm={6} md={4}>
+        <Grid.Col key={randomId()} span={12} sm={6} md={4}>
           <CardProduct maxWidth={150} product={prod} />
         </Grid.Col>
       )

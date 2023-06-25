@@ -5,6 +5,7 @@ import shoesArt from 'assets/img/shoes-art.jpg'
 import Skeleton from 'react-loading-skeleton'
 import { NavLink } from 'react-router-dom'
 import CardProduct from 'components/cardProduct/CardProduct'
+import { randomId } from '@mantine/hooks'
 
 export default function PopularProduct() {
   /* Local State */
@@ -50,9 +51,8 @@ export default function PopularProduct() {
   }
   const renderProduct = () => {
     return productList.map((prod) => {
-      const key = crypto.randomUUID()
       return (
-        <Grid.Col xs={6} key={key}>
+        <Grid.Col xs={6} key={randomId()}>
           <CardProduct maxWidth={150} product={prod} />
         </Grid.Col>
       )
