@@ -15,12 +15,14 @@ import React, { useEffect, useState } from 'react'
 import useStyles from './AccountPage.style'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from '@fortawesome/free-solid-svg-icons'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import productAPI from 'services/api/productAPI'
 import CardProduct from 'components/cardProduct/CardProduct'
 import openLogin from 'components/formLogin/openLogin'
+import useExpiredToken from 'hooks/useExpiredToken'
+import { userAction } from 'services/redux/slices/userSlice'
 
 export default function AccountPage() {
   useNaviProgress()
@@ -30,6 +32,7 @@ export default function AccountPage() {
   const { userProfile, userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
   const navigate = useNavigate()
+  const tokenExpired = useExpiredToken()
   /* Style */
   const { classes } = useStyles()
   /* Logic */
@@ -40,7 +43,7 @@ export default function AccountPage() {
     })
   }
   useEffect(() => {
-    if (!userProfile.email) {
+    if (tokenExpired) {
       navigate('/')
       return () => {
         toast.error('You are not logged in')
