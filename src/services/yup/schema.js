@@ -1,10 +1,7 @@
 import * as Yup from 'yup'
 import errMess from './errorMessage'
 import { regexPassword } from './regex'
-
-const capitalizeStr = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1)
-}
+import capitalizeStr from 'utils/method'
 
 Yup.setLocale({
   mixed: {

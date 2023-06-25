@@ -11,7 +11,7 @@ import {
   Tooltip,
 } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import useStyles from './AccountPage.style'
 import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,27 +20,39 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import openLogin from 'components/base/FormLogin/openLogin'
+import productAPI from 'services/api/productAPI'
 
 export default function AccountPage() {
   useNaviProgress()
+  /* Local State */
+  const [productList, setProductList] = useState([])
   /* App State */
-  const { userProfile } = useSelector((state) => state.user)
+  const { userProfile, userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
   const navigate = useNavigate()
   /* Style */
   const { classes } = useStyles()
   /* Logic */
+  const renderProduct = () => {
+    return productList.map((prod) => {
+      const key = crypto.randomUUID()
+      return <CardProduct key={key} maxWidth={150} product={prod} />
+    })
+  }
   useEffect(() => {
-    if (!('name' in userProfile)) {
+    if (!userProfile.email) {
       navigate('/')
-    }
-    return () => {
-      if (!('name' in userProfile)) {
+      return () => {
         toast.error('You are not logged in')
         openLogin()
       }
     }
-  }, [userProfile])
+    productAPI.getAll().then((data) => {
+      const listIdLike = userProductLike.productsFavorite.map((prod) => prod.id)
+      const productsLike = data.filter((prod) => listIdLike.includes(prod.id))
+      setProductList(productsLike)
+    })
+  }, [userProfile, userProductLike])
   return (
     <>
       <section className={classes.profile}>
@@ -61,7 +73,6 @@ export default function AccountPage() {
                 label={'Diamon Member'}
                 color="violet"
                 withArrow
-                position="top"
                 arrowSize={6}
                 offset={35}
                 transitionProps={{
@@ -120,10 +131,7 @@ export default function AccountPage() {
                 },
               ]}
             >
-              <CardProduct maxWidth={150} />
-              <CardProduct maxWidth={150} />
-              <CardProduct maxWidth={150} />
-              <CardProduct maxWidth={150} />
+              {renderProduct()}
             </SimpleGrid>
           </Card>
         </Container>

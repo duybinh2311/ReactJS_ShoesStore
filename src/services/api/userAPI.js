@@ -7,6 +7,8 @@ const USER_URL = {
   signin: 'Users/signin',
   getProfile: 'Users/getProfile',
   getProductLike: 'Users/getproductfavorite',
+  likeProduct: 'Users/like?productId=',
+  unlikeProduct: 'Users/unlike?productId=',
 }
 
 const userAPI = {
@@ -41,6 +43,14 @@ const userAPI = {
   getProductLike: async () => {
     const result = await shoesAPI.get(USER_URL.getProductLike)
     storage.save(USER_PRODUCT_LIKE, result.data.content)
+    return result.data.content
+  },
+  likeProduct: async (id) => {
+    const result = await shoesAPI.get(`${USER_URL.likeProduct}${id}`)
+    return result.data.content
+  },
+  unlikeProduct: async (id) => {
+    const result = await shoesAPI.get(`${USER_URL.unlikeProduct}${id}`)
     return result.data.content
   },
 }

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
-import { USER_LOGIN, USER_PROFILE } from 'utils/constant'
+import { USER_LOGIN, USER_PRODUCT_LIKE, USER_PROFILE } from 'utils/constant'
 import storage from 'utils/storage'
 
 /* Instance Axios */
@@ -19,6 +19,7 @@ shoesAPI.interceptors.request.use((config) => {
     if (decodedToken.exp * 1000 < currentDate.getTime()) {
       storage.clear(USER_LOGIN)
       storage.clear(USER_PROFILE)
+      storage.clear(USER_PRODUCT_LIKE)
     } else {
       config.headers.Authorization = `Bearer ${token}`
     }

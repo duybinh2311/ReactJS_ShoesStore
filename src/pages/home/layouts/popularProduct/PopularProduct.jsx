@@ -1,7 +1,6 @@
 import { Card, Divider, Grid, Image, MediaQuery, Title } from '@mantine/core'
 import CardProduct from 'components/base/CardProduct'
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
 import productAPI from 'services/api/productAPI'
 import shoesArt from 'assets/img/shoes-art.jpg'
 import Skeleton from 'react-loading-skeleton'
@@ -9,10 +8,10 @@ import { NavLink } from 'react-router-dom'
 
 export default function PopularProduct() {
   /* Local State */
-  const [popularProducts, setPopularProducts] = useState(Array(4).fill())
+  const [productList, setProductList] = useState(Array(4).fill())
   /* Logic */
   const renderBannerArt = () => {
-    if (!popularProducts[0]) {
+    if (!productList[0]) {
       return (
         <Skeleton
           height={'100%'}
@@ -21,39 +20,39 @@ export default function PopularProduct() {
           }}
         />
       )
-    } else {
-      return (
-        <NavLink to={'/shop'}>
-          <Image
-            src={shoesArt}
-            fit="cover"
-            height={'100%'}
-            styles={{
-              root: {
-                height: '100%',
-              },
-              imageWrapper: {
-                height: '100%',
-              },
-              figure: {
-                height: '100%',
-              },
-              image: {
-                '&:hover': {
-                  transition: 'all ease 4s',
-                  transform: 'scale(1.2)',
-                },
-              },
-            }}
-          />
-        </NavLink>
-      )
     }
+    return (
+      <NavLink to={'/shop'}>
+        <Image
+          src={shoesArt}
+          fit="cover"
+          height={'100%'}
+          styles={{
+            root: {
+              height: '100%',
+            },
+            imageWrapper: {
+              height: '100%',
+            },
+            figure: {
+              height: '100%',
+            },
+            image: {
+              '&:hover': {
+                transition: 'all ease 4s',
+                transform: 'scale(1.2)',
+              },
+            },
+          }}
+        />
+      </NavLink>
+    )
   }
-  const renderPopularProduct = () => {
-    return popularProducts.map((prod, index) => {
+  const renderProduct = () => {
+    return productList.map((prod) => {
+      const key = crypto.randomUUID()
       return (
-        <Grid.Col xs={6} key={index}>
+        <Grid.Col xs={6} key={key}>
           <CardProduct maxWidth={150} product={prod} />
         </Grid.Col>
       )
@@ -62,13 +61,13 @@ export default function PopularProduct() {
   useEffect(() => {
     productAPI.getAll().then((data) => {
       const dataCoppy = [...data]
-      const productList = popularProducts.map(() => {
+      const productListRandom = productList.map(() => {
         const iRandom = Math.floor(Math.random() * dataCoppy.length)
         const prodRandom = dataCoppy[iRandom]
         dataCoppy.splice(iRandom, 1)
         return prodRandom
       })
-      setPopularProducts(productList)
+      setProductList(productListRandom)
     })
   }, [])
   return (
@@ -100,7 +99,7 @@ export default function PopularProduct() {
           </Title>
         </MediaQuery>
         <Grid.Col lg={6} md={7}>
-          <Grid>{renderPopularProduct()}</Grid>
+          <Grid>{renderProduct()}</Grid>
         </Grid.Col>
       </Grid>
     </>

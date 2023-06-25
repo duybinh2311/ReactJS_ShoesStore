@@ -8,18 +8,35 @@ import {
   Title,
 } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useStyles from './ShopPage.style'
 import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import productAPI from 'services/api/productAPI'
 
 export default function ShopPage() {
   useNaviProgress()
   /* Local State */
-  const [productList, setProductList] = useState([])
+  const [productList, setProductList] = useState(Array(6).fill())
   /* Style */
   const { classes } = useStyles()
+  /* Logic */
+  const renderProduct = () => {
+    return productList.map((prod) => {
+      const key = crypto.randomUUID()
+      return (
+        <Grid.Col key={key} span={12} sm={6} md={4}>
+          <CardProduct maxWidth={150} product={prod} />
+        </Grid.Col>
+      )
+    })
+  }
+  useEffect(() => {
+    productAPI.getAll().then((data) => {
+      setProductList(data)
+    })
+  }, [])
   return (
     <>
       <section className={classes.sidebar}>
@@ -77,23 +94,7 @@ export default function ShopPage() {
               </Group>
             </Grid.Col>
             <Grid.Col span={12} md={10}>
-              <Grid>
-                <Grid.Col span={12} sm={6} md={4}>
-                  <CardProduct maxWidth={150} />
-                </Grid.Col>
-                <Grid.Col span={12} sm={6} md={4}>
-                  <CardProduct maxWidth={150} />
-                </Grid.Col>
-                <Grid.Col span={12} sm={6} md={4}>
-                  <CardProduct maxWidth={150} />
-                </Grid.Col>
-                <Grid.Col span={12} sm={6} md={4}>
-                  <CardProduct maxWidth={150} />
-                </Grid.Col>
-                <Grid.Col span={12} sm={6} md={4}>
-                  <CardProduct maxWidth={150} />
-                </Grid.Col>
-              </Grid>
+              <Grid>{renderProduct()}</Grid>
             </Grid.Col>
           </Grid>
         </Container>

@@ -17,9 +17,10 @@ export default function Carousel() {
         asNavFor={nav2}
         arrows={false}
       >
-        {dataCarousel.productItem.map((item, index) => {
+        {dataCarousel.productItem.map((item) => {
+          const key = crypto.randomUUID()
           return (
-            <Group key={index}>
+            <Group key={key}>
               <Image
                 src={item}
                 classNames={{
@@ -49,9 +50,10 @@ export default function Carousel() {
           autoplaySpeed={5000}
           arrows={false}
         >
-          {dataCarousel.productItem.map((item, index) => {
+          {dataCarousel.productItem.map((item) => {
+            const key = crypto.randomUUID()
             return (
-              <Group key={index}>
+              <Group key={key}>
                 <Image
                   src={item}
                   alt="product"

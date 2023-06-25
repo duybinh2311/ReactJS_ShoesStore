@@ -15,15 +15,76 @@ import {
   Text,
   ThemeIcon,
 } from '@mantine/core'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import bgProduct from 'assets/img/bg-product.jpg'
 import useStyles from './CardProduct.style'
 import Skeleton from 'react-loading-skeleton'
+import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-hot-toast'
+import userAPI from 'services/api/userAPI'
+import userThunk from 'services/redux/thunk/userThunk'
+import capitalizeStr from 'utils/method'
 
 export default function CardProduct({ maxWidth, product }) {
+  /* Local State */
+  const [like, setLike] = useState(false)
+  /* App State */
+  const { userProductLike } = useSelector((state) => state.user)
+  /* Hook Init */
+  const dispatch = useDispatch()
   /* Style */
   const { classes } = useStyles()
+  /* Logic */
+  const likeProduct = () => {
+    if (userProductLike.email && !like) {
+      const result = userAPI.likeProduct(product?.id)
+      toast.promise(result, {
+        loading: 'Loading',
+        success: (data) => {
+          const action = userThunk.getProductLike()
+          dispatch(action)
+          return capitalizeStr(data)
+        },
+        error: (err) => capitalizeStr(err),
+      })
+      return
+    }
+    if (userProductLike.email && like) {
+      const result = userAPI.unlikeProduct(product?.id)
+      toast.promise(
+        result,
+        {
+          loading: 'Loading',
+          success: (data) => {
+            const action = userThunk.getProductLike()
+            dispatch(action)
+            return capitalizeStr(data)
+          },
+          error: (err) => capitalizeStr(err),
+        },
+        {
+          success: {
+            iconTheme: {
+              primary: 'red',
+            },
+          },
+        }
+      )
+      return
+    }
+    toast.dismiss()
+    toast.error('You are not logged in')
+    return
+  }
+  useEffect(() => {
+    if (product) {
+      const isLike = userProductLike.productsFavorite?.some((item) => {
+        return item.id === product.id
+      })
+      setLike(isLike)
+    }
+  }, [product, userProductLike])
   return (
     <>
       <Card withBorder radius={'md'} pt={0}>
@@ -34,7 +95,7 @@ export default function CardProduct({ maxWidth, product }) {
           bgsz={'cover'}
         >
           {product ? (
-            <NavLink to={'/detail/productId=10'}>
+            <NavLink to={`/detail/productId=${product.id}`}>
               <Image
                 src={product.image}
                 py={10}
@@ -62,8 +123,8 @@ export default function CardProduct({ maxWidth, product }) {
         >
           best seller
         </Badge>
-        <ActionIcon className={classes.likeIcon}>
-          <FontAwesomeIcon icon={faHeart} />
+        <ActionIcon className={classes.likeIcon} onClick={likeProduct}>
+          <FontAwesomeIcon icon={faHeart} color={like ? 'red' : 'white'} />
         </ActionIcon>
         <Text fw={500} mt={'sm'}>
           <NavLink className={classes.title}>
