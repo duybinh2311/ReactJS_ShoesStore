@@ -2,8 +2,8 @@ import { Container } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
 import React from 'react'
 import useStyles from './DetailPage.style'
-import DetailProduct from './layouts/detailProduct/DetailProduct'
-import RelatedProduct from './layouts/relatedProduct/RelatedProduct'
+import DetailProduct from './detailProduct/DetailProduct'
+import RelatedProduct from './relatedProduct/RelatedProduct'
 
 export default function DetailPage() {
   useNaviProgress()

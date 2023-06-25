@@ -1,16 +1,16 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import router from 'router/router'
 import { MantineProvider } from '@mantine/core'
 import { NavigationProgress } from '@mantine/nprogress'
-import { RouterProvider } from 'react-router-dom'
+import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
 import { ripple } from 'utils/keyframes'
 import { Provider } from 'react-redux'
 import store from 'services/redux/configStore'
 import { ModalsProvider } from '@mantine/modals'
 import { Toaster } from 'react-hot-toast'
-import 'assets/scss/index.scss'
 import { SkeletonTheme } from 'react-loading-skeleton'
+import 'assets/scss/index.scss'
+import router from 'router/router'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>

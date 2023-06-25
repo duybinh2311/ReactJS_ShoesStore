@@ -1,16 +1,17 @@
-import { createBrowserRouter } from 'react-router-dom'
-import Root from 'templates/RootTemplate'
-import HomePage from 'pages/Home'
-import AccountPage from 'pages/Account'
-import CartPage from 'pages/Cart'
-import DetailPage from 'pages/Detail'
-import ShopPage from 'pages/Shop'
-import ErrorPage from 'pages/Error'
+import AccountPage from "pages/account/AccountPage"
+import CartPage from "pages/cart/CartPage"
+import DetailPage from "pages/detail/DetailPage"
+import ErrorPage from "pages/error/ErrorPage"
+import HomePage from "pages/home/HomePage"
+import ShopPage from "pages/shop/ShopPage"
+import { createBrowserRouter } from "react-router-dom"
+import RootTemplate from "templates/RootTemplate"
+
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <RootTemplate />,
     errorElement: <ErrorPage />,
     children: [
       {

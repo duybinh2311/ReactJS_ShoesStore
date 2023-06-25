@@ -2,8 +2,8 @@ import { Container, Grid, Text, Title } from '@mantine/core'
 import useNaviProgress from 'hooks/useNaviProgress'
 import React from 'react'
 import useStyles from './CartPage.style'
-import CartList from './components/CartList/CartList'
-import OrderDetail from './components/OrderDetail/OrderDetail'
+import CartList from './cartList/CartList'
+import OrderDetail from './orderDetail/OrderDetail'
 
 export default function CartPage() {
   useNaviProgress()

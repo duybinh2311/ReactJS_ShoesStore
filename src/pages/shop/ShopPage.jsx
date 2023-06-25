@@ -10,9 +10,9 @@ import {
 import useNaviProgress from 'hooks/useNaviProgress'
 import React, { useEffect, useState } from 'react'
 import useStyles from './ShopPage.style'
-import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
+import CardProduct from 'components/cardProduct/CardProduct'
 import productAPI from 'services/api/productAPI'
 
 export default function ShopPage() {

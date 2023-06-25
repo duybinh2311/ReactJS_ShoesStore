@@ -13,14 +13,14 @@ import {
 import useNaviProgress from 'hooks/useNaviProgress'
 import React, { useEffect, useState } from 'react'
 import useStyles from './AccountPage.style'
-import CardProduct from 'components/base/CardProduct'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGem } from '@fortawesome/free-solid-svg-icons'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import openLogin from 'components/base/FormLogin/openLogin'
 import productAPI from 'services/api/productAPI'
+import CardProduct from 'components/cardProduct/CardProduct'
+import openLogin from 'components/formLogin/openLogin'
 
 export default function AccountPage() {
   useNaviProgress()

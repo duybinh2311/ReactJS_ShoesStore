@@ -9,7 +9,7 @@ const PRODUCT_URL = {
 const productAPI = {
   getAll: async () => {
     const result = await shoesAPI.get(PRODUCT_URL.getAll)
-    // await new Promise((resolve) => setTimeout(resolve, 1000))
+    await new Promise((resolve) => setTimeout(resolve, 1000))
     return result.data.content
   },
 }
