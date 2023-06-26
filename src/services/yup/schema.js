@@ -1,20 +1,16 @@
 import * as Yup from 'yup'
 import errMess from './errorMessage'
-import { regexPassword } from './regex'
+import { regexNumber, regexPassword } from './regex'
 import capitalizeStr from 'utils/method'
 
 Yup.setLocale({
   mixed: {
     required: ({ path }) => `${capitalizeStr(path)} is required`,
-    notType: ({ path, type }) => `${capitalizeStr(path)} must be ${type}`,
   },
   string: {
     email: ({ path }) => `${capitalizeStr(path)} is invalid`,
     max: ({ path, max }) => `${capitalizeStr(path)} max ${max} character`,
-  },
-  number: {
     min: ({ path, min }) => `${capitalizeStr(path)} min ${min} character`,
-    max: ({ path, max }) => `${capitalizeStr(path)} max ${max} character`,
   },
 })
 
@@ -25,7 +21,7 @@ const registerSchema = Yup.object().shape({
     .required()
     .max(20),
   name: Yup.string().required(),
-  phone: Yup.number().required(),
+  phone: Yup.string().matches(regexNumber, errMess.phone).min(10).required(),
   gender: Yup.boolean().required(),
 })
 

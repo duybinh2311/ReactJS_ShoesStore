@@ -21,7 +21,6 @@ import { toast } from 'react-hot-toast'
 import productAPI from 'services/api/productAPI'
 import CardProduct from 'components/cardProduct/CardProduct'
 import openLogin from 'components/formLogin/openLogin'
-import useExpiredToken from 'hooks/useExpiredToken'
 import { randomId } from '@mantine/hooks'
 
 export default function AccountPage() {
@@ -32,7 +31,6 @@ export default function AccountPage() {
   const { userProfile, userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
   const navigate = useNavigate()
-  const tokenExpired = useExpiredToken()
   /* Style */
   const { classes } = useStyles()
   /* Logic */
@@ -42,7 +40,7 @@ export default function AccountPage() {
     })
   }
   useEffect(() => {
-    if (tokenExpired) {
+    if (userProductLike.email) {
       navigate('/')
       return () => {
         toast.error('You are not logged in')

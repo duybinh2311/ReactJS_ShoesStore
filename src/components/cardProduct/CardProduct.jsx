@@ -25,6 +25,7 @@ import { toast } from 'react-hot-toast'
 import userAPI from 'services/api/userAPI'
 import userThunk from 'services/redux/thunk/userThunk'
 import capitalizeStr from 'utils/method'
+import { useHover } from '@mantine/hooks'
 
 export default function CardProduct({ maxWidth, product }) {
   /* Local State */
@@ -33,8 +34,9 @@ export default function CardProduct({ maxWidth, product }) {
   const { userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
   const dispatch = useDispatch()
+  const { hovered, ref } = useHover()
   /* Style */
-  const { classes } = useStyles()
+  const { classes } = useStyles({ hovered })
   /* Logic */
   const likeProduct = () => {
     if (userProductLike.email && !like) {
@@ -87,33 +89,21 @@ export default function CardProduct({ maxWidth, product }) {
   }, [product, userProductLike])
   return (
     <>
-      <Card withBorder radius={'md'} pt={0}>
-        <Card.Section
-          className={classes.cardSection}
-          bg={`url(${bgProduct})`}
-          bgp={'center'}
-          bgsz={'cover'}
-        >
+      <Card withBorder radius={'md'} pt={0} ref={ref} className={classes.card}>
+        <Card.Section className={classes.cardSection}>
           {product ? (
             <NavLink to={`/detail/productId=${product.id}`}>
               <Image
                 src={product.image}
-                py={10}
-                mx={'auto'}
                 maw={maxWidth}
                 classNames={{
+                  root: classes.rootImage,
                   image: classes.image,
                 }}
               />
             </NavLink>
           ) : (
-            <Skeleton
-              style={{
-                borderBottomLeftRadius: 0,
-                borderBottomRightRadius: 0,
-              }}
-              height={200}
-            />
+            <Skeleton className={classes.skeletonImage} />
           )}
         </Card.Section>
         <Badge
@@ -154,7 +144,7 @@ export default function CardProduct({ maxWidth, product }) {
             Add To Cart
           </Button>
         ) : (
-          <Skeleton style={{ marginTop: 10 }} height={30} />
+          <Skeleton className={classes.skeletonBtn} />
         )}
       </Card>
     </>

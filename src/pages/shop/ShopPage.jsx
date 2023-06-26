@@ -93,7 +93,7 @@ export default function ShopPage() {
                 </Menu>
               </Group>
             </Grid.Col>
-            <Grid.Col span={12} md={10}>
+            <Grid.Col span={12} md={10}>  
               <Grid>{renderProduct()}</Grid>
             </Grid.Col>
           </Grid>

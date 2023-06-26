@@ -1,13 +1,16 @@
 import { createStyles, rem } from '@mantine/core'
+import bgProduct from 'assets/img/bg-product.jpg'
 
-export default createStyles((theme) => ({
+export default createStyles((theme, { hovered }) => ({
   card: {
-    position: 'relative',
-    boxShadow:
-      '0 0.0625rem 0.1875rem rgb(255 255 255 / 5%), rgb(255 255 255 / 5%) 0 1.25rem 1.5625rem -0.3125rem, rgb(255 255 255 / 4%) 0 0.625rem 0.625rem -0.3125rem',
+    transition: 'all 0.3s ease',
+    transform: hovered ? 'translateY(-10px)' : '',
   },
   cardSection: {
     position: 'relative',
+    backgroundImage: `url(${bgProduct})`,
+    backgroundPosition: 'center',
+    backgroundSize: 'cover',
     '&:before': {
       content: "''",
       position: 'absolute',
@@ -16,12 +19,21 @@ export default createStyles((theme) => ({
       backdropFilter: 'blur(1px) brightness(0.7)',
     },
   },
+  rootImage: {
+    margin: '0 auto',
+    padding: '10px 0',
+  },
   image: {
     transition: 'all 0.6s ease',
     '&:hover': {
       transform: 'rotate(-5deg) scale(1.05)',
       filter: 'drop-shadow(5px 5px 10px #6741D9)',
     },
+  },
+  skeletonImage: {
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 0,
+    height: 200,
   },
   badgeTop: {
     position: 'absolute',
@@ -44,5 +56,9 @@ export default createStyles((theme) => ({
     '&:hover': {
       backgroundColor: theme.colors.dark[4],
     },
+  },
+  skeletonBtn: {
+    marginTop: 10,
+    height: 30,
   },
 }))

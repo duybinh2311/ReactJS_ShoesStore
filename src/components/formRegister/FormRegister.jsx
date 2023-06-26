@@ -25,7 +25,7 @@ export default function FormRegister() {
       email: '',
       password: '',
       name: '',
-      phone: undefined,
+      phone: '',
       gender: undefined,
     },
     validate: yupResolver(registerSchema),
