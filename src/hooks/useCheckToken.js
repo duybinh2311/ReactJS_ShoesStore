@@ -21,8 +21,8 @@ export default function useCheckToken() {
         toast.error('Login session expired')
       }
     }
-    return useEffect(() => {
-      checkToken()
-    })
   }
+  return useEffect(() => {
+    checkToken()
+  })
 }
