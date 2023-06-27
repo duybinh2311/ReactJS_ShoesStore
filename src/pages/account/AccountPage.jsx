@@ -40,14 +40,14 @@ export default function AccountPage() {
     })
   }
   useEffect(() => {
-    if (userProductLike.email) {
+    if (!userProductLike.email) {
       navigate('/')
       return () => {
         toast.error('You are not logged in')
         openLogin()
       }
     }
-    productAPI.getAll().then((data) => {
+    productAPI.getAll(false).then((data) => {
       const listIdLike = userProductLike.productsFavorite.map((prod) => prod.id)
       const productsLike = data.filter((prod) => listIdLike.includes(prod.id))
       setProductList(productsLike)

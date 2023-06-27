@@ -1,7 +1,7 @@
 import { createStyles, rem } from '@mantine/core'
 
 export default createStyles((theme) => ({
-  sidebar: {
+  shop: {
     margin: `${rem(50)} 0`,
   },
   tabs: {
@@ -14,7 +14,7 @@ export default createStyles((theme) => ({
     marginRight: 10,
     marginBottom: 10,
     border: 'none',
-    transition: 'all 0.4s ease',
+    transition: 'all 0.1s ease',
     '&[data-active]': {
       backgroundColor: theme.fn.primaryColor(),
     },
