@@ -30,11 +30,6 @@ export default createStyles((theme, { hovered }) => ({
       filter: 'drop-shadow(5px 5px 10px #6741D9)',
     },
   },
-  skeletonImage: {
-    borderBottomLeftRadius: 0,
-    borderBottomRightRadius: 0,
-    height: 200,
-  },
   badgeTop: {
     position: 'absolute',
     top: theme.spacing.xs,
@@ -56,9 +51,5 @@ export default createStyles((theme, { hovered }) => ({
     '&:hover': {
       backgroundColor: theme.colors.dark[4],
     },
-  },
-  skeletonBtn: {
-    marginTop: 10,
-    height: 30,
   },
 }))

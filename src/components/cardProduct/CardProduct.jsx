@@ -103,7 +103,13 @@ export default function CardProduct({ maxWidth, product }) {
               />
             </NavLink>
           ) : (
-            <Skeleton className={classes.skeletonImage} />
+            <Skeleton
+              style={{
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                height: 170,
+              }}
+            />
           )}
         </Card.Section>
         <Badge
@@ -144,7 +150,12 @@ export default function CardProduct({ maxWidth, product }) {
             Add To Cart
           </Button>
         ) : (
-          <Skeleton className={classes.skeletonBtn} />
+          <Skeleton
+            style={{
+              marginTop: 10,
+              height: 30,
+            }}
+          />
         )}
       </Card>
     </>

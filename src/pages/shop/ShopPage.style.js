@@ -1,8 +1,11 @@
 import { createStyles, rem } from '@mantine/core'
 
 export default createStyles((theme) => ({
+  titleShop: {
+    margin: `${rem(50)} 0 ${rem(10)} 0`,
+  },
   shop: {
-    margin: `${rem(50)} 0`,
+    margin: ` 0 0 ${rem(50)} 0`,
   },
   tabs: {
     [theme.fn.smallerThan('md')]: {

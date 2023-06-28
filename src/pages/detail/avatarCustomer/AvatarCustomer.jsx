@@ -11,28 +11,32 @@ const avatarData = [
 ]
 
 export default function AvatarCustomer() {
+  /* Render */
+  const renderAvatar = () => {
+    return avatarData.map((customer) => {
+      return (
+        <Tooltip
+          color="violet"
+          label={customer.name}
+          withArrow
+          key={randomId()}
+          transitionProps={{
+            transition: 'scale',
+            duration: 300,
+          }}
+        >
+          <Avatar
+            radius={'xl'}
+            src={`https://i.pravatar.cc/150?u=${customer.email}@pravatar.com`}
+          />
+        </Tooltip>
+      )
+    })
+  }
   return (
     <Tooltip.Group>
       <Avatar.Group spacing={'sm'}>
-        {avatarData.map((customer) => {
-          return (
-            <Tooltip
-              color="violet"
-              label={customer.name}
-              withArrow
-              key={randomId()}
-              transitionProps={{
-                transition: 'scale',
-                duration: 300,
-              }}
-            >
-              <Avatar
-                radius={'xl'}
-                src={`https://i.pravatar.cc/150?u=${customer.email}@pravatar.com`}
-              />
-            </Tooltip>
-          )
-        })}
+        {renderAvatar()}
         <Tooltip
           color="violet"
           label="More than 9 other people have rated this product"

@@ -11,6 +11,42 @@ export default function Carousel() {
   const [nav2, setNav2] = useState()
   /* Style */
   const { classes } = useStyles()
+  /* Render */
+  const renderSlideMain = () => {
+    return dataCarousel.productItem.map((item) => {
+      return (
+        <Group key={randomId()}>
+          <Image
+            src={item}
+            classNames={{
+              imageWrapper: classes.imageWrapper,
+              image: classes.image,
+            }}
+          />
+        </Group>
+      )
+    })
+  }
+  const renderSlideSub = () => {
+    return dataCarousel.productItem.map((item) => {
+      const key = crypto.randomUUID()
+      return (
+        <Group key={key}>
+          <Image
+            src={item}
+            alt="product"
+            p={10}
+            classNames={{
+              root: classes.rootImage2,
+              imageWrapper: classes.imageWrapper2,
+              figure: classes.figure2,
+              image: classes.image2,
+            }}
+          />
+        </Group>
+      )
+    })
+  }
   return (
     <>
       <Slider
@@ -18,19 +54,7 @@ export default function Carousel() {
         asNavFor={nav2}
         arrows={false}
       >
-        {dataCarousel.productItem.map((item) => {
-          return (
-            <Group key={randomId()}>
-              <Image
-                src={item}
-                classNames={{
-                  imageWrapper: classes.imageWrapper,
-                  image: classes.image,
-                }}
-              />
-            </Group>
-          )
-        })}
+        {renderSlideMain()}
       </Slider>
       <Container
         size={'xs'}
@@ -50,24 +74,7 @@ export default function Carousel() {
           autoplaySpeed={5000}
           arrows={false}
         >
-          {dataCarousel.productItem.map((item) => {
-            const key = crypto.randomUUID()
-            return (
-              <Group key={key}>
-                <Image
-                  src={item}
-                  alt="product"
-                  p={10}
-                  classNames={{
-                    root: classes.rootImage2,
-                    imageWrapper: classes.imageWrapper2,
-                    figure: classes.figure2,
-                    image: classes.image2,
-                  }}
-                />
-              </Group>
-            )
-          })}
+          {renderSlideSub()}
         </Slider>
       </Container>
     </>

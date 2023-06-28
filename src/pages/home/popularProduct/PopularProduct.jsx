@@ -10,7 +10,7 @@ import { randomId } from '@mantine/hooks'
 export default function PopularProduct() {
   /* Local State */
   const [productList, setProductList] = useState(Array(4).fill())
-  /* Logic */
+  /* Render */
   const renderBannerArt = () => {
     if (!productList[0]) {
       return (
@@ -58,6 +58,7 @@ export default function PopularProduct() {
       )
     })
   }
+  /* Logic */
   useEffect(() => {
     productAPI.getAll().then((data) => {
       const dataCoppy = [...data]
