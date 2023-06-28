@@ -17,14 +17,12 @@ import {
 } from '@mantine/core'
 import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
-import bgProduct from 'assets/img/bg-product.jpg'
 import useStyles from './CardProduct.style'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
 import userAPI from 'services/api/userAPI'
 import userThunk from 'services/redux/thunk/userThunk'
-import capitalizeStr from 'utils/method'
 import { useHover } from '@mantine/hooks'
 
 export default function CardProduct({ maxWidth, product }) {
@@ -46,9 +44,9 @@ export default function CardProduct({ maxWidth, product }) {
         success: (data) => {
           const action = userThunk.getProductLike()
           dispatch(action)
-          return capitalizeStr(data)
+          return data
         },
-        error: (err) => capitalizeStr(err),
+        error: (err) => err,
       })
       return
     }
@@ -61,9 +59,9 @@ export default function CardProduct({ maxWidth, product }) {
           success: (data) => {
             const action = userThunk.getProductLike()
             dispatch(action)
-            return capitalizeStr(data)
+            return data
           },
-          error: (err) => capitalizeStr(err),
+          error: (err) => err,
         },
         {
           success: {
@@ -77,7 +75,6 @@ export default function CardProduct({ maxWidth, product }) {
     }
     toast.dismiss()
     toast.error('You are not logged in')
-    return
   }
   useEffect(() => {
     if (product) {
@@ -92,7 +89,7 @@ export default function CardProduct({ maxWidth, product }) {
       <Card withBorder radius={'md'} pt={0} ref={ref} className={classes.card}>
         <Card.Section className={classes.cardSection}>
           {product ? (
-            <NavLink to={`/detail/productId=${product.id}`}>
+            <NavLink to={`/detail/${product.id}`}>
               <Image
                 src={product.image}
                 maw={maxWidth}

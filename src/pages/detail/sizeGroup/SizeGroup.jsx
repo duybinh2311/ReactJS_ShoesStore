@@ -2,13 +2,12 @@ import { ActionIcon, Group, Text } from '@mantine/core'
 import { randomId } from '@mantine/hooks'
 import React, { useState } from 'react'
 
-export default function SizeGroup() {
+export default function SizeGroup({ data }) {
   /* Local State */
   const [sizeClick, setSizeClick] = useState(null)
-  const sizes = [36, 37, 38, 39, 40, 41, 42, 43]
   /* Render */
   const renderBtnSize = () => {
-    return sizes.map((size) => {
+    return data.map((size) => {
       return (
         <ActionIcon
           key={randomId()}

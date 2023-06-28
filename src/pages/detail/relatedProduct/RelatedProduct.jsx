@@ -1,8 +1,9 @@
 import React from 'react'
 import { Divider, SimpleGrid, Title } from '@mantine/core'
 import CardProduct from 'components/cardProduct/CardProduct'
+import { randomId } from '@mantine/hooks'
 
-export default function RelatedProduct() {
+export default function RelatedProduct({ productList }) {
   return (
     <>
       <Divider
@@ -28,10 +29,9 @@ export default function RelatedProduct() {
           },
         ]}
       >
-        <CardProduct maxWidth={150} />
-        <CardProduct maxWidth={150} />
-        <CardProduct maxWidth={150} />
-        <CardProduct maxWidth={150} />
+        {productList.map((item) => {
+          return <CardProduct maxWidth={150} product={item} key={randomId()} />
+        })}
       </SimpleGrid>
     </>
   )

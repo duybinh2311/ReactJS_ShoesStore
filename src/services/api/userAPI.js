@@ -1,5 +1,6 @@
 import shoesAPI from 'services/axios/configAxios'
 import { USER_LOGIN, USER_PRODUCT_LIKE, USER_PROFILE } from 'utils/constant'
+import capitalizeStr from 'utils/method'
 import storage from 'utils/storage'
 
 const USER_URL = {
@@ -45,13 +46,21 @@ const userAPI = {
     storage.save(USER_PRODUCT_LIKE, result.data.content)
     return result.data.content
   },
-  likeProduct: async (id) => {
+  likeProduct: async (id, fakeLoading = true) => {
     const result = await shoesAPI.get(`${USER_URL.likeProduct}${id}`)
-    return result.data.content
+    const messCap = capitalizeStr(result.data.content)
+    if (fakeLoading) {
+      await new Promise((resolve) => setTimeout(resolve, 500))
+    }
+    return messCap
   },
-  unlikeProduct: async (id) => {
+  unlikeProduct: async (id, fakeLoading = true) => {
     const result = await shoesAPI.get(`${USER_URL.unlikeProduct}${id}`)
-    return result.data.content
+    const messCap = capitalizeStr(result.data.content)
+    if (fakeLoading) {
+      await new Promise((resolve) => setTimeout(resolve, 500))
+    }
+    return messCap
   },
 }
 

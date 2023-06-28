@@ -1,6 +1,6 @@
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Button, Group, Menu, Tabs, TextInput, Title } from '@mantine/core'
+import { Button, Group, Menu, Tabs, Title } from '@mantine/core'
 import React from 'react'
 
 export default function MenuFilter({ filterProduct, classes }) {
