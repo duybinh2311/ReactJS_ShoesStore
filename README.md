@@ -1,6 +1,6 @@
 # Violet Shoes Store - Design By Nguyễn Duy Bình
 
-[![Facebook](https://img.shields.io/facebook/follow/mantinedev?style=social)](https://www.facebook.com/duy.binh.010196)
+[![Facebook](https://img.shields.io/badge/facebook-nguyenduybinh)](https://www.facebook.com/duy.binh.010196)
 
 ## Library Used
 
