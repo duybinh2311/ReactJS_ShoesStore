@@ -95,7 +95,7 @@ export default function Footer() {
             </Text>
           </Group>
           <Title order={5} mt={'md'}>
-            Privacy Policy
+            Design by - Nguyễn Duy Bình
           </Title>
         </Stack>
       </Container>

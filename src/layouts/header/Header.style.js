@@ -9,7 +9,8 @@ export default createStyles((theme) => ({
   },
   headerActive: {
     padding: '10px 0',
-    position: 'sticky',
+    position: 'fixed',
+    width: '100%',
     borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
     top: 0,
     zIndex: 1000,
