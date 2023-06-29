@@ -51,6 +51,7 @@ export default function Header() {
   return (
     <>
       <Drawer
+        position="right"
         zIndex={2000}
         opened={openDrawer}
         onClose={close}
