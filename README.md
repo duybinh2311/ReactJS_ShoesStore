@@ -26,5 +26,9 @@
 - Login
 - Register
 - Filter Product
+- Like, Unlike Product
 - Add, Delete, Change Product In Cart
 - Sync Cart With Account
+- Update Profile (Updating)
+- Search Product (Updating)
+
