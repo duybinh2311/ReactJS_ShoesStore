@@ -26,6 +26,14 @@
 - Responsive (Done)
 - Call API (Done)
 
+## Pages
+- Home
+- Detail Product
+- Cart
+- Account
+- Shop
+- Error
+
 ## Features
 
 - Login
