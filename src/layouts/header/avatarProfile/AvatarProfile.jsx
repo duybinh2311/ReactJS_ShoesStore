@@ -13,7 +13,7 @@ import { userAction } from 'services/redux/slices/userSlice'
 import storage from 'utils/storage'
 import { cartAction } from 'services/redux/slices/cartSlice'
 
-export default function AvatarProfile({ classes, user }) {
+export default function AvatarProfile({ classes, user, openDrawer }) {
   /* App State */
   const { userProfile } = useSelector((state) => state.user)
   const { totalItem } = useSelector((state) => state.cart)
@@ -61,6 +61,7 @@ export default function AvatarProfile({ classes, user }) {
         color="red"
         label={totalItem > 99 ? '99+' : totalItem}
         disabled={!totalItem}
+        onClick={openDrawer}
       >
         <FontAwesomeIcon icon={faCartShopping} className={classes.icon} />
       </Indicator>
