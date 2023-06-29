@@ -33,12 +33,13 @@ export default function AccountPage() {
   const navigate = useNavigate()
   /* Style */
   const { classes } = useStyles()
-  /* Logic */
+  /* Render */
   const renderProduct = () => {
     return productList.map((prod) => {
       return <CardProduct key={randomId()} maxWidth={150} product={prod} />
     })
   }
+  /* Logic */
   useEffect(() => {
     if (!userProductLike.email) {
       navigate('/')

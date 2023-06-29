@@ -12,8 +12,11 @@ import {
   Title,
 } from '@mantine/core'
 import PaymentIcon from 'components/paymentIcon/PaymentIcon'
+import { useSelector } from 'react-redux'
 
 export default function OrderDetail() {
+  /* App State */
+  const { totalPrice } = useSelector((state) => state.cart)
   return (
     <Stack
       h={'100%'}
@@ -37,7 +40,7 @@ export default function OrderDetail() {
             Total :
           </Text>
           <Text tt={'uppercase'} fw={'bold'}>
-            $ 10.000
+            $ {totalPrice.toLocaleString()}
           </Text>
         </Group>
         <Group position="apart" p={10}>
@@ -59,7 +62,7 @@ export default function OrderDetail() {
               }}
             />
           </Text>
-          <Progress value={50} color="green" w={'100%'} striped animate />
+          <Progress value={100} color="green" w={'100%'} striped animate />
           <Text tt={'capitalize'} fz={12} color="dimmed">
             Free shipping for any orders above{' '}
             <span

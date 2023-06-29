@@ -3,7 +3,6 @@ import { Transition, Tabs } from '@mantine/core'
 import { NavLink } from 'react-router-dom'
 
 export default function TabResponsive({ opened, setOpened, classes, data }) {
-  /* Hook Init */
   return (
     <Transition
       transition={'slide-right'}

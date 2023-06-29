@@ -15,6 +15,7 @@ import storage from 'utils/storage'
 export default function AvatarProfile({ classes, user }) {
   /* App State */
   const { userProfile } = useSelector((state) => state.user)
+  const { totalItem } = useSelector((state) => state.cart)
   /* Hook Init */
   const dispatch = useDispatch()
   /* Logic */
@@ -23,6 +24,13 @@ export default function AvatarProfile({ classes, user }) {
     storage.clear(USER_PROFILE)
     storage.clear(USER_PRODUCT_LIKE)
     dispatch(userAction.reset())
+  }
+  const totalCart = () => {
+    const totalCartItem = cartList.reduce((total, item) => {
+      total += item.quantity
+      return total
+    }, 0)
+    return totalCartItem > 99 ? '+99' : totalCartItem
   }
   return (
     <Group>
@@ -54,7 +62,7 @@ export default function AvatarProfile({ classes, user }) {
           <Menu.Item onClick={logoutAccount}>Log out</Menu.Item>
         </Menu.Dropdown>
       </Menu>
-      <Indicator label="12" color="red">
+      <Indicator color="red" label={totalItem} disabled={!totalItem}>
         <FontAwesomeIcon icon={faCartShopping} className={classes.icon} />
       </Indicator>
     </Group>

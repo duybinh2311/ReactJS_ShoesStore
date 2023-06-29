@@ -22,6 +22,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import userAPI from 'services/api/userAPI'
 import { toast } from 'react-hot-toast'
 import userThunk from 'services/redux/thunk/userThunk'
+import { cartAction } from 'services/redux/slices/cartSlice'
+import { useParams } from 'react-router-dom'
 
 export default function DetailProduct({ product }) {
   /* Local State */
@@ -31,9 +33,33 @@ export default function DetailProduct({ product }) {
   const { userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
   const dispatch = useDispatch()
+  const params = useParams()
   /* Style */
   const { classes } = useStyles()
   /* Logic */
+  const addToCart = () => {
+    if (userProductLike.email) {
+      const { id, image, shortDescription, price, name } = product
+      const userCart = {
+        user: userProductLike.email,
+        item: {
+          id,
+          image,
+          shortDescription,
+          price,
+          name,
+          quantity,
+          total: price * quantity,
+        },
+      }
+      const action = cartAction.add(userCart)
+      dispatch(action)
+      toast.success('Add product success')
+      return
+    }
+    toast.dismiss()
+    toast.error('You are not logged in')
+  }
   const likeProduct = () => {
     if (userProductLike.email && !like) {
       userAPI
@@ -66,12 +92,15 @@ export default function DetailProduct({ product }) {
   }
   useEffect(() => {
     if (product) {
-      const isLike = userProductLike.productsFavorite.some((item) => {
+      const isLike = userProductLike?.productsFavorite?.some((item) => {
         return item.id === product.id
       })
       setLike(isLike)
     }
   }, [product, userProductLike])
+  useEffect(() => {
+    setQuantity(1)
+  }, [params.productId])
   return (
     <Grid>
       <Grid.Col sm={12} md={6}>
@@ -154,7 +183,12 @@ export default function DetailProduct({ product }) {
                     <FontAwesomeIcon icon={faPlus} />
                   </ActionIcon>
                 </Group>
-                <Button className={classes.btnAdd} tt={'uppercase'} mt={'xs'}>
+                <Button
+                  className={classes.btnAdd}
+                  tt={'uppercase'}
+                  mt={'xs'}
+                  onClick={addToCart}
+                >
                   Add To Cart
                 </Button>
               </Group>

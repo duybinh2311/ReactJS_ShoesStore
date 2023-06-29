@@ -24,6 +24,7 @@ import { toast } from 'react-hot-toast'
 import userAPI from 'services/api/userAPI'
 import userThunk from 'services/redux/thunk/userThunk'
 import { useHover } from '@mantine/hooks'
+import { cartAction } from 'services/redux/slices/cartSlice'
 
 export default function CardProduct({ maxWidth, product }) {
   /* Local State */
@@ -36,6 +37,29 @@ export default function CardProduct({ maxWidth, product }) {
   /* Style */
   const { classes } = useStyles({ hovered })
   /* Logic */
+  const addToCart = () => {
+    if (userProductLike.email) {
+      const { id, image, shortDescription, price, name } = product
+      const userCart = {
+        user: userProductLike.email,
+        item: {
+          id,
+          image,
+          shortDescription,
+          price,
+          name,
+          quantity: 1,
+          total: price,
+        },
+      }
+      const action = cartAction.add(userCart)
+      dispatch(action)
+      toast.success('Add product success')
+      return
+    }
+    toast.dismiss()
+    toast.error('You are not logged in')
+  }
   const likeProduct = () => {
     if (userProductLike.email && !like) {
       const result = userAPI.likeProduct(product?.id)
@@ -87,9 +111,9 @@ export default function CardProduct({ maxWidth, product }) {
   return (
     <>
       <Card withBorder radius={'md'} pt={0} ref={ref} className={classes.card}>
-        <Card.Section className={classes.cardSection}>
-          {product ? (
-            <NavLink to={`/detail/${product.id}`}>
+        {product ? (
+          <NavLink to={`/detail/${product?.id}`}>
+            <Card.Section className={classes.cardSection}>
               <Image
                 src={product.image}
                 maw={maxWidth}
@@ -98,8 +122,10 @@ export default function CardProduct({ maxWidth, product }) {
                   image: classes.image,
                 }}
               />
-            </NavLink>
-          ) : (
+            </Card.Section>
+          </NavLink>
+        ) : (
+          <Card.Section>
             <Skeleton
               style={{
                 borderBottomLeftRadius: 0,
@@ -107,8 +133,8 @@ export default function CardProduct({ maxWidth, product }) {
                 height: 170,
               }}
             />
-          )}
-        </Card.Section>
+          </Card.Section>
+        )}
         <Badge
           className={classes.badgeTop}
           variant="gradient"
@@ -119,10 +145,8 @@ export default function CardProduct({ maxWidth, product }) {
         <ActionIcon className={classes.likeIcon} onClick={likeProduct}>
           <FontAwesomeIcon icon={faHeart} color={like ? 'red' : 'white'} />
         </ActionIcon>
-        <Text fw={500} mt={'sm'}>
-          <NavLink className={classes.title}>
-            {product?.name || <Skeleton />}
-          </NavLink>
+        <Text fw={500} mt={'sm'} className={classes.title}>
+          {product?.name || <Skeleton />}
         </Text>
         <Text fz={'sm'} color="dimmed" lineClamp={2}>
           {product?.description || <Skeleton count={2} />}
@@ -143,6 +167,7 @@ export default function CardProduct({ maxWidth, product }) {
             mt={'sm'}
             fullWidth
             leftIcon={<FontAwesomeIcon icon={faCartPlus} />}
+            onClick={addToCart}
           >
             Add To Cart
           </Button>
