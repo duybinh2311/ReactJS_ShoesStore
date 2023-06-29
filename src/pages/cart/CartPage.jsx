@@ -4,9 +4,12 @@ import React from 'react'
 import useStyles from './CartPage.style'
 import CartList from './cartList/CartList'
 import OrderDetail from './orderDetail/OrderDetail'
+import { useSelector } from 'react-redux'
 
 export default function CartPage() {
   useNaviProgress()
+  /* App State */
+  const { totalItem } = useSelector((state) => state.cart)
   /* Style */
   const { classes } = useStyles()
   return (
@@ -17,7 +20,7 @@ export default function CartPage() {
             your order
           </Title>
           <Text color="dimmed" fz={14} mb={'xs'} tt={'uppercase'}>
-            there are 11 item(s) in your cart
+            there are {totalItem} item(s) in your cart
           </Text>
           <Grid>
             <Grid.Col md={8}>

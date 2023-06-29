@@ -79,6 +79,19 @@ const cartSlice = createSlice({
         storage.save(state.cartUser, state)
       }
     },
+    getCartHistory: (state, action) => {
+      const { cartUser, cartList, totalItem, totalPrice } = action.payload
+      state.cartUser = cartUser
+      state.cartList = cartList
+      state.totalItem = totalItem
+      state.totalPrice = totalPrice
+    },
+    reset: (state) => {
+      state.cartUser = ''
+      state.cartList = []
+      state.totalItem = 0
+      state.totalPrice = 0
+    },
   },
 })
 

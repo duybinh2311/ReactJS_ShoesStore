@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { USER_LOGIN, USER_PRODUCT_LIKE, USER_PROFILE } from 'utils/constant'
 import { userAction } from 'services/redux/slices/userSlice'
 import storage from 'utils/storage'
+import { cartAction } from 'services/redux/slices/cartSlice'
 
 export default function AvatarProfile({ classes, user }) {
   /* App State */
@@ -24,6 +25,7 @@ export default function AvatarProfile({ classes, user }) {
     storage.clear(USER_PROFILE)
     storage.clear(USER_PRODUCT_LIKE)
     dispatch(userAction.reset())
+    dispatch(cartAction.reset())
   }
   return (
     <Group>
