@@ -25,13 +25,6 @@ export default function AvatarProfile({ classes, user }) {
     storage.clear(USER_PRODUCT_LIKE)
     dispatch(userAction.reset())
   }
-  const totalCart = () => {
-    const totalCartItem = cartList.reduce((total, item) => {
-      total += item.quantity
-      return total
-    }, 0)
-    return totalCartItem > 99 ? '+99' : totalCartItem
-  }
   return (
     <Group>
       <Menu trigger="click" withArrow>
@@ -62,7 +55,11 @@ export default function AvatarProfile({ classes, user }) {
           <Menu.Item onClick={logoutAccount}>Log out</Menu.Item>
         </Menu.Dropdown>
       </Menu>
-      <Indicator color="red" label={totalItem} disabled={!totalItem}>
+      <Indicator
+        color="red"
+        label={totalItem > 99 ? '+99' : totalItem}
+        disabled={!totalItem}
+      >
         <FontAwesomeIcon icon={faCartShopping} className={classes.icon} />
       </Indicator>
     </Group>
