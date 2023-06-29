@@ -59,7 +59,7 @@ export default function AvatarProfile({ classes, user }) {
       </Menu>
       <Indicator
         color="red"
-        label={totalItem > 99 ? '+99' : totalItem}
+        label={totalItem > 99 ? '99+' : totalItem}
         disabled={!totalItem}
       >
         <FontAwesomeIcon icon={faCartShopping} className={classes.icon} />

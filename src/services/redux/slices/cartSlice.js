@@ -6,6 +6,10 @@ const initialState = {
   cartList: [],
   totalItem: 0,
   totalPrice: 0,
+  recentlyItem: {
+    action: '',
+    name: '',
+  },
 }
 
 const cartSlice = createSlice({
@@ -19,6 +23,8 @@ const cartSlice = createSlice({
         state.cartList.push(item)
         state.totalItem = item.quantity
         state.totalPrice = item.total
+        state.recentlyItem.action = 'add'
+        state.recentlyItem.name = item.name
         storage.save(state.cartUser, state)
         return
       }
@@ -29,8 +35,12 @@ const cartSlice = createSlice({
       if (itemInCart) {
         itemInCart.quantity += item.quantity
         itemInCart.total += item.total
+        state.recentlyItem.action = 'add'
+        state.recentlyItem.name = itemInCart.name
       } else {
         state.cartList.push(item)
+        state.recentlyItem.action = 'add'
+        state.recentlyItem.name = item.name
       }
       state.totalItem = state.cartList.reduce((total, item) => {
         total += item.quantity
@@ -49,6 +59,8 @@ const cartSlice = createSlice({
         cartItem.total += cartItem.price
         state.totalItem += 1
         state.totalPrice += cartItem.price
+        state.recentlyItem.action = 'increase'
+        state.recentlyItem.name = cartItem.name
         storage.save(state.cartUser, state)
       }
     },
@@ -59,6 +71,8 @@ const cartSlice = createSlice({
         cartItem.total -= cartItem.price
         state.totalItem -= 1
         state.totalPrice -= cartItem.price
+        state.recentlyItem.action = 'reduce'
+        state.recentlyItem.name = cartItem.name
         storage.save(state.cartUser, state)
       }
     },
@@ -67,6 +81,8 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload
       )
       if (itemIndex !== -1) {
+        state.recentlyItem.action = 'delete'
+        state.recentlyItem.name = state.cartList[itemIndex].name
         state.cartList.splice(itemIndex, 1)
         state.totalItem = state.cartList.reduce((total, item) => {
           total += item.quantity
@@ -76,21 +92,29 @@ const cartSlice = createSlice({
           total += item.total
           return total
         }, 0)
+      }
+      if (state.totalItem) {
         storage.save(state.cartUser, state)
+      } else {
+        state.recentlyItem.action = ''
+        state.recentlyItem.name = ''
+        storage.clear(state.cartUser)
       }
     },
     getCartHistory: (state, action) => {
-      const { cartUser, cartList, totalItem, totalPrice } = action.payload
-      state.cartUser = cartUser
-      state.cartList = cartList
-      state.totalItem = totalItem
-      state.totalPrice = totalPrice
+      state.cartUser = action.payload.cartUser
+      state.cartList = action.payload.cartList
+      state.totalItem = action.payload.totalItem
+      state.totalPrice = action.payload.totalPrice
+      state.recentlyItem = action.payload.recentlyItem
     },
     reset: (state) => {
       state.cartUser = ''
       state.cartList = []
       state.totalItem = 0
       state.totalPrice = 0
+      state.recentlyItem.action = ''
+      state.recentlyItem.name = ''
     },
   },
 })

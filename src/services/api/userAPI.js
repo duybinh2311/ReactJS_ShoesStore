@@ -50,7 +50,7 @@ const userAPI = {
     const result = await shoesAPI.get(`${USER_URL.likeProduct}${id}`)
     const messCap = capitalizeStr(result.data.content)
     if (fakeLoading) {
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 200))
     }
     return messCap
   },
@@ -58,7 +58,7 @@ const userAPI = {
     const result = await shoesAPI.get(`${USER_URL.unlikeProduct}${id}`)
     const messCap = capitalizeStr(result.data.content)
     if (fakeLoading) {
-      await new Promise((resolve) => setTimeout(resolve, 500))
+      await new Promise((resolve) => setTimeout(resolve, 200))
     }
     return messCap
   },

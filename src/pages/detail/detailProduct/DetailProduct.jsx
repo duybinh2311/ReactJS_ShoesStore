@@ -19,11 +19,10 @@ import useStyles from './DetailProduct.style'
 import PaymentIcon from 'components/paymentIcon/PaymentIcon'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
-import userAPI from 'services/api/userAPI'
 import { toast } from 'react-hot-toast'
-import userThunk from 'services/redux/thunk/userThunk'
 import { cartAction } from 'services/redux/slices/cartSlice'
 import { useParams } from 'react-router-dom'
+import useLikeProductAPI from 'hooks/useLikeProductAPI'
 
 export default function DetailProduct({ product }) {
   /* Local State */
@@ -34,6 +33,7 @@ export default function DetailProduct({ product }) {
   /* Hook Init */
   const dispatch = useDispatch()
   const params = useParams()
+  const likeProduct = useLikeProductAPI({ like, product })
   /* Style */
   const { classes } = useStyles()
   /* Logic */
@@ -55,36 +55,6 @@ export default function DetailProduct({ product }) {
       const action = cartAction.add(userCart)
       dispatch(action)
       toast.success('Add product success')
-      return
-    }
-    toast.dismiss()
-    toast.error('You are not logged in')
-  }
-  const likeProduct = () => {
-    if (userProductLike.email && !like) {
-      userAPI
-        .likeProduct(product?.id, false)
-        .then((data) => {
-          const action = userThunk.getProductLike()
-          dispatch(action)
-          toast.success(data)
-        })
-        .catch((error) => {
-          toast.error(error)
-        })
-      return
-    }
-    if (userProductLike.email && like) {
-      userAPI
-        .unlikeProduct(product?.id, false)
-        .then((data) => {
-          const action = userThunk.getProductLike()
-          dispatch(action)
-          toast.success(data, { iconTheme: { primary: 'red' } })
-        })
-        .catch((error) => {
-          toast.error(error)
-        })
       return
     }
     toast.dismiss()

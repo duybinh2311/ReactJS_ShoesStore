@@ -21,10 +21,9 @@ import useStyles from './CardProduct.style'
 import Skeleton from 'react-loading-skeleton'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-hot-toast'
-import userAPI from 'services/api/userAPI'
-import userThunk from 'services/redux/thunk/userThunk'
 import { useHover } from '@mantine/hooks'
 import { cartAction } from 'services/redux/slices/cartSlice'
+import useLikeProductAPI from 'hooks/useLikeProductAPI'
 
 export default function CardProduct({ maxWidth, product }) {
   /* Local State */
@@ -34,6 +33,7 @@ export default function CardProduct({ maxWidth, product }) {
   /* Hook Init */
   const dispatch = useDispatch()
   const { hovered, ref } = useHover()
+  const likeProduct = useLikeProductAPI({ like, product })
   /* Style */
   const { classes } = useStyles({ hovered })
   /* Logic */
@@ -54,47 +54,7 @@ export default function CardProduct({ maxWidth, product }) {
       }
       const action = cartAction.add(userCart)
       dispatch(action)
-      toast.success('Add product success')
-      return
-    }
-    toast.dismiss()
-    toast.error('You are not logged in')
-  }
-  const likeProduct = () => {
-    if (userProductLike.email && !like) {
-      const result = userAPI.likeProduct(product?.id)
-      toast.promise(result, {
-        loading: 'Loading',
-        success: (data) => {
-          const action = userThunk.getProductLike()
-          dispatch(action)
-          return data
-        },
-        error: (err) => err,
-      })
-      return
-    }
-    if (userProductLike.email && like) {
-      const result = userAPI.unlikeProduct(product?.id)
-      toast.promise(
-        result,
-        {
-          loading: 'Loading',
-          success: (data) => {
-            const action = userThunk.getProductLike()
-            dispatch(action)
-            return data
-          },
-          error: (err) => err,
-        },
-        {
-          success: {
-            iconTheme: {
-              primary: 'red',
-            },
-          },
-        }
-      )
+      toast.success('Product added to cart successfully!')
       return
     }
     toast.dismiss()

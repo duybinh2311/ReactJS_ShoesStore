@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { faTruckFast } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -15,8 +15,15 @@ import PaymentIcon from 'components/paymentIcon/PaymentIcon'
 import { useSelector } from 'react-redux'
 
 export default function OrderDetail() {
+  /* Local State */
+  const [progress, setProgress] = useState(0)
   /* App State */
   const { totalPrice } = useSelector((state) => state.cart)
+  /* Logic */
+  useEffect(() => {
+    const value = totalPrice / 20
+    setProgress(value)
+  }, [totalPrice])
   return (
     <Stack
       h={'100%'}
@@ -53,16 +60,19 @@ export default function OrderDetail() {
         </Group>
         <Stack p={10}>
           <Text color="green" fz={12} fw={500}>
-            CONGRATULATIONS! YOU'VE GOT FREE SHIPPING!
+            {progress >= 100
+              ? `CONGRATULATIONS! YOU'VE GOT FREE SHIPPING!`
+              : `SPEND $${2000 - totalPrice} FOR FREE SHIPPING`}
             <FontAwesomeIcon
               icon={faTruckFast}
               bounce
               style={{
                 marginLeft: 5,
+                display: progress >= 100 ? 'inline-block' : 'none',
               }}
             />
           </Text>
-          <Progress value={100} color="green" w={'100%'} striped animate />
+          <Progress value={progress} color="green" w={'100%'} animate />
           <Text tt={'capitalize'} fz={12} color="dimmed">
             Free shipping for any orders above{' '}
             <span
@@ -72,7 +82,7 @@ export default function OrderDetail() {
                 fontSize: 16,
               }}
             >
-              $200
+              $2000
             </span>
           </Text>
         </Stack>
