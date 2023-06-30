@@ -93,10 +93,10 @@ export default function Header() {
                     >
                       {item.name}
                     </Text>
-                    <Text fz={10} color="dimmed">
+                    <Text fz={10} color="dimmed" fw="bold">
                       {`$ ${item.price}`}
                     </Text>
-                    <Text fz={10} color="dimmed">
+                    <Text fz={10} color="dimmed" fw="bold">
                       {item.quantity}
                     </Text>
                   </Stack>

@@ -1,6 +1,6 @@
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Badge, Stack } from '@mantine/core'
+import { Badge, Group, Stack, Text } from '@mantine/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CartItem from '../cartItem/CartItem'
@@ -27,10 +27,17 @@ export default function CartList({ maxHeight, maxWidthItem }) {
         message = ' - has reduced the quantity'
         break
       case 'delete':
-        message = ' - has been deleted from the shopping cart'
+        message = ' - has beed removed from the shopping cart'
         break
     }
-    return itemName + message
+    return (
+      <>
+        {itemName}
+        <Text tt={'lowercase'} fw={'lighter'} component="span">
+          {message}
+        </Text>
+      </>
+    )
   }
   const changeColorBadgeAction = () => {
     const action = recentlyItem?.action
@@ -41,6 +48,12 @@ export default function CartList({ maxHeight, maxWidthItem }) {
     switch (action) {
       case 'add':
         color = 'green'
+        break
+      case 'increase':
+        color = 'blue'
+        break
+      case 'reduce':
+        color = 'yellow'
         break
       case 'delete':
         color = 'red'
@@ -63,6 +76,7 @@ export default function CartList({ maxHeight, maxWidthItem }) {
         fullWidth
         py={15}
         radius={'xs'}
+        tt={'capitalize'}
         leftSection={
           totalItem !== 0 && (
             <FontAwesomeIcon icon={faBell} fontSize={12} shake />
