@@ -5,7 +5,9 @@ import userAPI from 'services/api/userAPI'
 import userThunk from 'services/redux/thunk/userThunk'
 
 export default function useLikeProductAPI({ like, product }) {
+  /* App State */
   const { userProductLike } = useSelector((state) => state.user)
+  /* Hook Init */
   const dispatch = useDispatch()
   return () => {
     if (userProductLike.email && !like) {
