@@ -40,7 +40,7 @@ export default function DetailProduct({ product }) {
   const addToCart = () => {
     if (userProductLike.email) {
       const { id, image, shortDescription, price, name } = product
-      const userCart = {
+      const cartItem = {
         user: userProductLike.email,
         item: {
           id,
@@ -52,9 +52,9 @@ export default function DetailProduct({ product }) {
           total: price * quantity,
         },
       }
-      const action = cartAction.add(userCart)
+      const action = cartAction.add(cartItem)
       dispatch(action)
-      toast.success('Add product success')
+      toast.success('Product added to cart successfully!')
       return
     }
     toast.dismiss()
