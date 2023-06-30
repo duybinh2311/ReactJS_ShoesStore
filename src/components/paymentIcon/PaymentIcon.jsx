@@ -8,7 +8,7 @@ import {
   FaCcVisa,
 } from 'react-icons/fa'
 
-export default function PaymentIcon() {
+export default React.memo(function PaymentIcon() {
   return (
     <Stack>
       <Divider
@@ -34,4 +34,4 @@ export default function PaymentIcon() {
       </Group>
     </Stack>
   )
-}
+})
