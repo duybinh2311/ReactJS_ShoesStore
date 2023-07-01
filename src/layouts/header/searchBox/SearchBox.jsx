@@ -16,10 +16,9 @@ export default function SearchBox() {
   /* Render */
   const itemSearch = forwardRef(({ image, price, name, id }, ref) => {
     return (
-      <NavLink to={`/detail/${id}`} style={{ color: 'unset' }}>
+      <NavLink ref={ref} to={`/detail/${id}`} style={{ color: 'unset' }}>
         <Group
           noWrap
-          ref={ref}
           align="flex-start"
           py={5}
           sx={(theme) => ({
