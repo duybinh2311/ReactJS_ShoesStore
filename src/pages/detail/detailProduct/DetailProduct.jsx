@@ -18,11 +18,10 @@ import SizeGroup from '../sizeGroup/SizeGroup'
 import useStyles from './DetailProduct.style'
 import PaymentIcon from 'components/paymentIcon/PaymentIcon'
 import Skeleton from 'react-loading-skeleton'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-hot-toast'
-import { cartAction } from 'services/redux/slices/cartSlice'
+import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import useLikeProductAPI from 'hooks/useLikeProductAPI'
+import useAddToCart from 'hooks/useAddToCart'
 
 export default function DetailProduct({ product }) {
   /* Local State */
@@ -31,35 +30,12 @@ export default function DetailProduct({ product }) {
   /* App State */
   const { userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
-  const dispatch = useDispatch()
   const params = useParams()
   const likeProduct = useLikeProductAPI({ like, product })
+  const addToCart = useAddToCart({ quantity, product })
   /* Style */
   const { classes } = useStyles()
   /* Logic */
-  const addToCart = () => {
-    if (userProductLike.email) {
-      const { id, image, shortDescription, price, name } = product
-      const cartItem = {
-        user: userProductLike.email,
-        item: {
-          id,
-          image,
-          shortDescription,
-          price,
-          name,
-          quantity,
-          total: price * quantity,
-        },
-      }
-      const action = cartAction.add(cartItem)
-      dispatch(action)
-      toast.success('Product added to cart successfully!')
-      return
-    }
-    toast.dismiss()
-    toast.error('You are not logged in')
-  }
   useEffect(() => {
     if (product) {
       const isLike = userProductLike?.productsFavorite?.some((item) => {

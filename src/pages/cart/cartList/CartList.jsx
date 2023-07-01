@@ -1,6 +1,6 @@
 import { faBell } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { Badge, Group, Stack, Text } from '@mantine/core'
+import { Badge, Stack, Text } from '@mantine/core'
 import React from 'react'
 import { useSelector } from 'react-redux'
 import CartItem from '../cartItem/CartItem'

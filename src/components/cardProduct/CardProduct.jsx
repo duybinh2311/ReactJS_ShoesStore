@@ -19,11 +19,10 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import useStyles from './CardProduct.style'
 import Skeleton from 'react-loading-skeleton'
-import { useDispatch, useSelector } from 'react-redux'
-import { toast } from 'react-hot-toast'
+import { useSelector } from 'react-redux'
 import { useHover } from '@mantine/hooks'
-import { cartAction } from 'services/redux/slices/cartSlice'
 import useLikeProductAPI from 'hooks/useLikeProductAPI'
+import useAddToCart from 'hooks/useAddToCart'
 
 export default function CardProduct({ maxWidth, product }) {
   /* Local State */
@@ -31,35 +30,12 @@ export default function CardProduct({ maxWidth, product }) {
   /* App State */
   const { userProductLike } = useSelector((state) => state.user)
   /* Hook Init */
-  const dispatch = useDispatch()
   const { hovered, ref } = useHover()
   const likeProduct = useLikeProductAPI({ like, product })
+  const addToCart = useAddToCart({ quantity: 1, product })
   /* Style */
   const { classes } = useStyles({ hovered })
   /* Logic */
-  const addToCart = () => {
-    if (userProductLike.email) {
-      const { id, image, shortDescription, price, name } = product
-      const userCart = {
-        user: userProductLike.email,
-        item: {
-          id,
-          image,
-          shortDescription,
-          price,
-          name,
-          quantity: 1,
-          total: price,
-        },
-      }
-      const action = cartAction.add(userCart)
-      dispatch(action)
-      toast.success('Product added to cart successfully!')
-      return
-    }
-    toast.dismiss()
-    toast.error('You are not logged in')
-  }
   useEffect(() => {
     if (product) {
       const isLike = userProductLike.productsFavorite?.some((item) => {
