@@ -74,13 +74,18 @@ export default function DrawerCart({ openDrawer, closeDrawer }) {
           $ {totalPrice.toLocaleString()}
         </Text>
       </Group>
-      <Button onClick={close} tt={'uppercase'} variant="outline" fullWidth>
+      <Button
+        onClick={closeDrawer}
+        tt={'uppercase'}
+        variant="outline"
+        fullWidth
+      >
         continue shopping
       </Button>
       <Button
         onClick={() => {
           navigate('cart')
-          close()
+          closeDrawer()
         }}
         tt={'uppercase'}
         mt={'xs'}
