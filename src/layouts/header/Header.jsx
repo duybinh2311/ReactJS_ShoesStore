@@ -27,7 +27,7 @@ export default function Header() {
   const [scroll, setScroll] = useState(false)
   /* App State */
   const { userLogin } = useSelector((state) => state.user)
-  const { cartList } = useSelector((state) => state.cart)
+  const { cartList, totalItem, totalPrice } = useSelector((state) => state.cart)
   /* Hook Init */
   const clickOutSideRef = useClickOutside(() => setOpened(false))
   const [openDrawer, { open, close }] = useDisclosure(false)
@@ -55,11 +55,12 @@ export default function Header() {
         zIndex={2000}
         opened={openDrawer}
         onClose={close}
-        title="YOUR CART"
+        title={`YOUR CART ${totalItem} ITEM(S)`}
       >
         <Stack
           spacing={'xs'}
-          mih={'75vh'}
+          mih={'70vh'}
+          mah={'70vh'}
           style={{
             overflow: 'auto',
           }}
@@ -108,13 +109,15 @@ export default function Header() {
             )
           })}
         </Stack>
-        <Button
-          onClick={close}
-          tt={'uppercase'}
-          mt={'xl'}
-          variant="outline"
-          fullWidth
-        >
+        <Group position="apart" my={'md'}>
+          <Text fw={'bold'} color="white">
+            Total Price :
+          </Text>
+          <Text fw={'bold'} color="white">
+            $ {totalPrice.toLocaleString()}
+          </Text>
+        </Group>
+        <Button onClick={close} tt={'uppercase'} variant="outline" fullWidth>
           continue shopping
         </Button>
         <Button

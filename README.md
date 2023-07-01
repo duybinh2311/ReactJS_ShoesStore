@@ -21,12 +21,14 @@
 - [Deploy](https://violet-shoes-store.vercel.app/)
 - [Demo](https://youtu.be/FfgV19YUY6s)
 
-## Progress Build 
+## Progress Build
+
 - Layout (Done)
 - Responsive (Done)
 - Call API (Done)
 
 ## Pages
+
 - Home
 - Detail Product
 - Cart
@@ -42,6 +44,3 @@
 - Like, Unlike Product
 - Add, Delete, Change Product In Cart
 - Sync Cart With Account
-- Update Profile (Updating)
-- Search Product (Updating)
-

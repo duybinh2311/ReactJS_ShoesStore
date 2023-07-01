@@ -61,8 +61,8 @@ export default function FormLogin() {
       </Text>
       <form onSubmit={form.onSubmit((data) => submitForm(data))}>
         <Stack>
-          <TextInput {...form.getInputProps('email')} label="Email" />
-          <PasswordInput {...form.getInputProps('password')} label="Password" />
+          <TextInput withAsterisk {...form.getInputProps('email')} label="Email" />
+          <PasswordInput withAsterisk {...form.getInputProps('password')} label="Password" />
           <Button type="submit" mt={10}>
             Sign In
           </Button>

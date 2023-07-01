@@ -18,6 +18,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { modals } from '@mantine/modals'
 import { toast } from 'react-hot-toast'
+import { NavLink } from 'react-router-dom'
 
 export default function CartItem({ maxWidth, product }) {
   /* Hook Init */
@@ -73,34 +74,36 @@ export default function CartItem({ maxWidth, product }) {
       </Tooltip.Floating>
       <Grid>
         <Grid.Col span={12} sm={8}>
-          <Group align="flex-start">
-            <Image src={product.image} maw={maxWidth} bg={'white'} />
-            <Stack spacing={5}>
-              <Text
-                fz={14}
-                fw={'bold'}
-                tt={'uppercase'}
-                color="violet.7"
-                truncate
-                className={classes.text}
-              >
-                {product.name}
-              </Text>
-              <Text fz={14} color="dimmed">
-                {`$ ${product.price}`}
-              </Text>
-              <Text
-                fz={12}
-                color="dimmed"
-                tt={'capitalize'}
-                w={350}
-                truncate
-                className={classes.text}
-              >
-                {product.shortDescription}
-              </Text>
-            </Stack>
-          </Group>
+          <NavLink to={`/detail/${product.id}`}>
+            <Group align="flex-start">
+              <Image src={product.image} maw={maxWidth} bg={'white'} />
+              <Stack spacing={5}>
+                <Text
+                  fz={14}
+                  fw={'bold'}
+                  tt={'uppercase'}
+                  color="violet.7"
+                  truncate
+                  className={classes.text}
+                >
+                  {product.name}
+                </Text>
+                <Text fz={14} color="dimmed">
+                  {`$ ${product.price}`}
+                </Text>
+                <Text
+                  fz={12}
+                  color="dimmed"
+                  tt={'capitalize'}
+                  w={350}
+                  truncate
+                  className={classes.text}
+                >
+                  {product.shortDescription}
+                </Text>
+              </Stack>
+            </Group>
+          </NavLink>
         </Grid.Col>
         <Grid.Col span={12} sm={4}>
           <Group position="apart" align="flex-start">

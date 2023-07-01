@@ -46,7 +46,6 @@ export default function ShopPage() {
   }, [])
   useEffect(() => {
     if (shuffle) {
-      shuffle.sort({})
       shuffle.filter(filterKey)
       setShoesTotal(shuffle.sortedItems.length)
     }
@@ -59,7 +58,7 @@ export default function ShopPage() {
             <Title tt={'uppercase'} order={3}>
               all shoes
             </Title>
-            <Text color="dimmed" fz={14} mb={'xs'} tt={'uppercase'}>
+            <Text color="dimmed" fz={14} tt={'uppercase'}>
               there are {shoesTotal} item(s) in filter
             </Text>
           </Stack>

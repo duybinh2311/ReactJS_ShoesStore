@@ -2,7 +2,7 @@ import { createStyles, rem } from '@mantine/core'
 
 export default createStyles((theme) => ({
   titleShop: {
-    margin: `${rem(50)} 0 ${rem(10)} 0`,
+    margin: `${rem(50)} 0 ${rem(15)} 0`,
   },
   shop: {
     margin: ` 0 0 ${rem(50)} 0`,
@@ -14,7 +14,7 @@ export default createStyles((theme) => ({
   },
   tab: {
     backgroundColor: theme.colors.gray[9],
-    marginRight: 10,
+    marginRight: theme.spacing.md,
     marginBottom: 10,
     border: 'none',
     transition: 'all 0.1s ease',
