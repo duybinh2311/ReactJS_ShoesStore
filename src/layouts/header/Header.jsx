@@ -8,6 +8,7 @@ import TabGroupVertical from './tabGroupVertical/TabGroupVertical'
 import ButtonSignInUp from './buttonSignInUp/ButtonSignInUp'
 import AvatarProfile from './avatarProfile/AvatarProfile'
 import { useSelector } from 'react-redux'
+import SearchBox from './searchBox/SearchBox'
 
 export default function Header({ openDrawer }) {
   /* Local State */
@@ -48,15 +49,18 @@ export default function Header({ openDrawer }) {
               className={classes.burger}
             />
             <TabGroup classes={classes} data={dataTab} />
-            {userLogin.email ? (
-              <AvatarProfile
-                classes={classes}
-                user={userLogin}
-                openDrawer={openDrawer}
-              />
-            ) : (
-              <ButtonSignInUp />
-            )}
+            <Group>
+              <SearchBox />
+              {userLogin.email ? (
+                <AvatarProfile
+                  classes={classes}
+                  user={userLogin}
+                  openDrawer={openDrawer}
+                />
+              ) : (
+                <ButtonSignInUp />
+              )}
+            </Group>
           </Group>
           <TabGroupVertical
             opened={opened}

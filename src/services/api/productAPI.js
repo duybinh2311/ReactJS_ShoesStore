@@ -3,6 +3,7 @@ import shoesAPI from 'services/axios/configAxios'
 const PRODUCT_URL = {
   getAll: 'Product',
   getById: 'Product/getbyid?id=',
+  getByKeyWord: 'Product?keyword=',
 }
 
 const productAPI = {
@@ -16,6 +17,10 @@ const productAPI = {
       await new Promise((resolve) => setTimeout(resolve, 1000))
     }
     return dataConvert
+  },
+  getByKeyWord: async (key) => {
+    const result = await shoesAPI.get(`${PRODUCT_URL.getByKeyWord}${key}`)
+    return result.data.content
   },
   getById: async (id) => {
     const result = await shoesAPI.get(`${PRODUCT_URL.getById}${id}`)
