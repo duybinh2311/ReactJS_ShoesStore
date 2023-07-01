@@ -64,6 +64,9 @@ export default function SearchBox() {
         root: {
           width: 500,
           [theme.fn.smallerThan(700)]: {
+            width: 400,
+          },
+          [theme.fn.smallerThan(600)]: {
             display: 'none',
           },
         },
