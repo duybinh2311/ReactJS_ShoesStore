@@ -1,6 +1,7 @@
+import { modals } from '@mantine/modals'
+import openLogin from 'components/formLogin/openLogin'
 import jwtDecode from 'jwt-decode'
 import React, { useEffect } from 'react'
-import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { cartAction } from 'services/redux/slices/cartSlice'
 import { userAction } from 'services/redux/slices/userSlice'
@@ -20,7 +21,22 @@ export default function useCheckToken() {
       if (decodedToken.exp * 1000 < currentDate.getTime()) {
         const action = userAction.reset()
         dispatch(action)
-        toast.error('Login session expired')
+        modals.openConfirmModal({
+          title: 'Your session has expired',
+          centered: true,
+          labels: {
+            confirm: 'Login',
+            cancel: 'Cancel',
+          },
+          children: 'Please log in again to continue shopping',
+          onConfirm: openLogin,
+          styles: {
+            title: {
+              fontWeight: 500,
+              color: 'white',
+            },
+          },
+        })
       } else {
         const cartList = storage.get(userLogin.email)
         if (cartList) {
