@@ -2,10 +2,10 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Autocomplete, Avatar, Group, Stack, Text } from '@mantine/core'
 import React, { forwardRef, useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import productAPI from 'services/api/productAPI'
 
-export default function SearchBox() {
+export default function SearchBox(props) {
   /* Local State */
   const [searchInput, setSearchInput] = useState('')
   const [productList, setProductList] = useState([])
@@ -46,6 +46,7 @@ export default function SearchBox() {
   }, [searchInput])
   return (
     <Autocomplete
+      {...props}
       icon={<FontAwesomeIcon icon={faSearch} />}
       placeholder="Search product"
       data={data}
@@ -53,7 +54,6 @@ export default function SearchBox() {
       onChange={handleChangeInput}
       onItemSubmit={({ id }) => navigate(`/detail/${id}`)}
       zIndex={3000}
-      w={'100%'}
       limit={20}
       styles={{
         dropdown: {

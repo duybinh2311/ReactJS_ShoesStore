@@ -8,9 +8,9 @@ export default createStyles((theme) => ({
     transition: 'all 0.4s ease',
   },
   headerActive: {
-    padding: '10px 0',
-    position: 'fixed',
     width: '100%',
+    position: 'fixed',
+    padding: '10px 0',
     borderBottom: `1px solid rgba(255, 255, 255, 0.1)`,
     top: 0,
     zIndex: 1000,
@@ -22,7 +22,6 @@ export default createStyles((theme) => ({
     },
   },
   tabsActive: {
-    padding: '15px 0',
     [theme.fn.smallerThan(820)]: {
       display: 'block',
     },

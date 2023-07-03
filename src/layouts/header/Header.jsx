@@ -4,7 +4,6 @@ import dataTab from './data'
 import {
   Box,
   Burger,
-  Button,
   Container,
   Divider,
   Group,
@@ -79,6 +78,7 @@ export default function Header({ openDrawer }) {
               )}
             </Group>
           </Group>
+          {/* <SearchBox /> */}
           <TabGroupVertical
             opened={opened}
             setOpened={setOpened}
