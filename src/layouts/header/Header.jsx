@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import useStyles from './Header.style'
 import dataTab from './data'
-import { Burger, Container, Divider, Group } from '@mantine/core'
+import {
+  Box,
+  Burger,
+  Button,
+  Container,
+  Divider,
+  Group,
+  MediaQuery,
+} from '@mantine/core'
 import { useClickOutside } from '@mantine/hooks'
 import TabGroup from './tabGroup/TabGroup'
 import TabGroupVertical from './tabGroupVertical/TabGroupVertical'
@@ -50,7 +58,16 @@ export default function Header({ openDrawer }) {
             />
             <TabGroup classes={classes} data={dataTab} />
             <Group>
-              <SearchBox />
+              <MediaQuery
+                smallerThan={820}
+                styles={{
+                  display: 'none',
+                }}
+              >
+                <Box w={400}>
+                  <SearchBox />
+                </Box>
+              </MediaQuery>
               {userLogin.email ? (
                 <AvatarProfile
                   classes={classes}

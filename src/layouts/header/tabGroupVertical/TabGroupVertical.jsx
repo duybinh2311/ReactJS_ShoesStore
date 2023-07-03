@@ -1,6 +1,7 @@
 import React from 'react'
 import { Transition, Tabs } from '@mantine/core'
 import { NavLink } from 'react-router-dom'
+import SearchBox from '../searchBox/SearchBox'
 
 export default function TabResponsive({ opened, setOpened, classes, data }) {
   return (
@@ -21,7 +22,8 @@ export default function TabResponsive({ opened, setOpened, classes, data }) {
             tab: classes.tab,
           }}
         >
-          <Tabs.List>
+          <SearchBox />
+          <Tabs.List mt={'xs'}>
             {data.map((tab, index) => {
               return (
                 <NavLink to={tab.url} key={index}>

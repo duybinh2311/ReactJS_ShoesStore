@@ -1,6 +1,8 @@
 import React from 'react'
 import {
+  Anchor,
   Button,
+  Center,
   LoadingOverlay,
   PasswordInput,
   Stack,
@@ -16,6 +18,7 @@ import { useDisclosure } from '@mantine/hooks'
 import { userAction } from 'services/redux/slices/userSlice'
 import { modals } from '@mantine/modals'
 import userThunk from 'services/redux/thunk/userThunk'
+import openRegister from 'components/formRegister/openRegister'
 
 export default function FormLogin() {
   /* Hook Init */
@@ -61,11 +64,22 @@ export default function FormLogin() {
       </Text>
       <form onSubmit={form.onSubmit((data) => submitForm(data))}>
         <Stack>
-          <TextInput withAsterisk {...form.getInputProps('email')} label="Email" />
-          <PasswordInput withAsterisk {...form.getInputProps('password')} label="Password" />
-          <Button type="submit" mt={10}>
-            Sign In
-          </Button>
+          <TextInput
+            withAsterisk
+            {...form.getInputProps('email')}
+            label="Email"
+          />
+          <PasswordInput
+            withAsterisk
+            {...form.getInputProps('password')}
+            label="Password"
+          />
+          <Center>
+            <Anchor onClick={openRegister}>
+              Don't have an account, register now
+            </Anchor>
+          </Center>
+          <Button type="submit">Sign In</Button>
         </Stack>
       </form>
     </>

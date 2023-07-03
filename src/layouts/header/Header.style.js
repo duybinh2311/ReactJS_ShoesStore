@@ -17,13 +17,13 @@ export default createStyles((theme) => ({
     backgroundColor: theme.colors.gray[9],
   },
   tabs: {
-    [theme.fn.smallerThan('md')]: {
+    [theme.fn.smallerThan(820)]: {
       display: 'none',
     },
   },
   tabsActive: {
     padding: '15px 0',
-    [theme.fn.smallerThan('md')]: {
+    [theme.fn.smallerThan(820)]: {
       display: 'block',
     },
   },
@@ -56,7 +56,7 @@ export default createStyles((theme) => ({
     cursor: 'pointer',
   },
   burger: {
-    [theme.fn.smallerThan('md')]: {
+    [theme.fn.smallerThan(820)]: {
       display: 'block',
     },
   },

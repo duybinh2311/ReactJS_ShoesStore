@@ -1,6 +1,9 @@
 import React from 'react'
 import {
+  Anchor,
+  Box,
   Button,
+  Center,
   Group,
   LoadingOverlay,
   PasswordInput,
@@ -82,13 +85,17 @@ export default function FormRegister() {
           />
           <Radio.Group
             {...form.getInputProps('gender')}
-            mb={10}
             label="Select your gender"
             withAsterisk
           >
             <Group my={5}>
               <Radio value={'true'} label="Male" />
               <Radio value={'false'} label="Female" />
+              <Center ml={'auto'}>
+                <Anchor onClick={openLogin}>
+                  Already have an account, login now
+                </Anchor>
+              </Center>
             </Group>
           </Radio.Group>
           <Button type="submit">Register</Button>
